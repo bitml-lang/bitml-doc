@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/balzac-lang/balzac-doc.svg?branch=master)](https://travis-ci.org/balzac-lang/balzac-doc)
+[![Build Status](https://travis-ci.com/bitml-lang/bitml-doc.svg?branch=master)](https://travis-ci.com/bitml-lang/bitml-doc)
 
 # Requirements
 
