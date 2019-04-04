@@ -31,9 +31,7 @@ class BitmlLexer(RegexLexer):
         'btrue','band','bor','bnot','b=','b!=','b<','b<=','b+','b-','bsize','pred','between','strategy',
         'b-if','do-reveal','do-auth','not-destory','do-destory','state','check-liquid','check','has-more-than','check-query'
     )
-    builtins = (
-        
-    )
+    builtins = ('*')
 
     # valid names for identifiers
     # well, names can only not consist fully of numbers

@@ -1,6 +1,6 @@
-******
+********************
 BitML Toolchain
-******
+********************
 
 |langname| is a domain specific language for specifying smart contracts 
 that can be executed on Bitcoin [18CCS]_.
