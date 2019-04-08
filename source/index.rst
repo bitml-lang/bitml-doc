@@ -36,8 +36,10 @@ of the `University of Cagliari <https://www.unica.it/unica/en/homepage.page>`_.
 
     nutshell
 
+    compiler
 
-
+    verification
+	      
 .. toctree::
     :hidden:
     :maxdepth: 3
