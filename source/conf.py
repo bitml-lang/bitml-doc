@@ -305,5 +305,10 @@ rst_prolog = """
 .. |langname| replace:: {0}
 
 .. role:: bitml(code)
-   :language: bitml
+   :language: bitml\
+
+.. role:: balzac(code)
+   :language: balzac
 """.format(langname)
+
+

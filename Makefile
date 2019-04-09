@@ -258,9 +258,59 @@ install-lexer:
 		fi \
 	done
 
+.PHONY: install-lexer-balzac
+install-lexer-balzac:
+	LEXER_NAME=balzac.py; \
+	LEXER_FILE=lexers/$$LEXER_NAME; \
+	STYLE_NAME=eclipse.py; \
+	STYLE_FILE=lexers/$$STYLE_NAME; \
+	PY_SITES=`pip show pygments | grep Location | cut -f2 -d\ `; \
+	for s in $$PY_SITES; do \
+		LEXERS_DIR=$$s/pygments/lexers; \
+		STYLES_DIR=$$s/pygments/styles; \
+		echo $$LEXERS_DIR; \
+		if [ -d $$LEXERS_DIR ]; then \
+			echo "Installing $$LEXER_NAME in $$LEXERS_DIR"; \
+			sudo rm -f $$LEXERS_DIR/$$LEXER_NAME; \
+			sudo cp $$LEXER_FILE $$LEXERS_DIR; \
+			cd $$LEXERS_DIR; \
+			sudo python _mapping.py; \
+			cd $$OLDPWD; \
+		fi; \
+		echo $$STYLES_DIR; \
+		if [ -d $$STYLES_DIR ]; then \
+			echo "Installing $$STYLE_NAME in $$STYLES_DIR"; \
+			sudo rm -f $$STYLES_DIR/$$STYLE_NAME; \
+			sudo cp $$STYLE_FILE $$STYLES_DIR; \
+		fi \
+	done
+
 .PHONY: remove-lexer
 remove-lexer:
 	LEXER_NAME=bitml.py; \
+	STYLE_NAME=eclipse.py; \
+	PY_SITES=`pip show pygments | grep Location | cut -f2 -d\ `; \
+	for s in $$PY_SITES; do \
+		LEXERS_DIR=$$s/pygments/lexers; \
+		STYLES_DIR=$$s/pygments/styles; \
+		echo $$LEXERS_DIR; \
+		if [ -d $$LEXERS_DIR ]; then \
+			echo "Removing $$LEXER_NAME in $$LEXERS_DIR"; \
+			sudo rm -f $$LEXERS_DIR/$$LEXER_NAME; \
+			cd $$LEXERS_DIR; \
+			sudo python _mapping.py; \
+			cd $$OLDPWD; \
+		fi; \
+		echo $$STYLES_DIR; \
+		if [ -d $$STYLES_DIR ]; then \
+			echo "Removing $$STYLE_NAME in $$STYLES_DIR"; \
+			sudo rm -f $$STYLES_DIR/$$STYLE_NAME; \
+		fi \
+	done
+
+.PHONY: remove-lexer-balzac
+remove-lexer:
+	LEXER_NAME=balzac.py; \
 	STYLE_NAME=eclipse.py; \
 	PY_SITES=`pip show pygments | grep Location | cut -f2 -d\ `; \
 	for s in $$PY_SITES; do \
