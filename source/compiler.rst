@@ -73,7 +73,7 @@ Here is the compiled output of the previous contract.
 	const sigBT1 : signature = _ 
 
 	transaction T1 { 
-	 input = [ Tinit@0:  sigBT1 sigAT1 ] 
+	 input = [ Tinit@0:  sigAT1 sigBT1 ] 
 	 output = 0.01 BTC : fun(x) . versig(pubkeyB; x) 
 	 
 	}
