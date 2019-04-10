@@ -16,10 +16,10 @@ We define this transaction output as follows:
 
 .. code-block:: bitml
 
-	(define txA "txid:4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b@0")
+	(define txA "tx:02000000000102f28b8ec15a48abd9cda80d1c770ff9770dc0c549ddb1b8013b9e50a8799614aa000000001716001412a88716720982b693ab2bd2a2fcd4d98bdd2485feffffff08d59c3aeafd6003e6e099adde64f17d6ec7950619c22b50466281afa782e9d4000000001716001433845a8590dbf145b52bdd777103d1ddfdaa9cedfeffffff022fac1f000000000017a914e9f772646a0b6174c936806dab1b882e750ac04a8740420f00000000001976a914ded135b86a7ff97aece531c8b97dc8a3cb3ddc7488ac02473044022060135384eafe9a8021e8b8c46da20e7cd5713d581c3f79b1da3d2f7860a1bfed02206ca1ac1616d7ab778bcbb235b4b24286c2181ec171b8cadeaa9ee5f4f78fd330012102d5f8f263a81427330e7f26ba5832a2cd01e960bf145be2101bc0b6bb0fde8c2d0247304402200e02da2228774b47ff03a5a7c1bf1d070d0cec6cd9a08d6862e1855ba33dfb9f0220011511f10aaefbf402b2944b6a877c1ff9890a7fc3e266bbb74318b4540c555d012103ef2a573fbd46356dcbdbedcecc9aa25dcb500512e2be394297475ed157a9cfc6bdb51600@1")
 
-where :bitml:`"4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"`
-is the transaction identifier, and the trailing :bitml:`"@0"` is the index of the output.
+where :bitml:`"02000000000102f28b...4297475ed157a9cfc6bdb51600"`
+are the bytes of the serialized transaction, and the trailing :bitml:`"@0"` is the index of the output.
 	
 The contract is the following:
 
@@ -40,13 +40,13 @@ participant :bitml:`"B"`.
 In the previous contract, the initial deposit has been provided by a transaction output, 
 but more in general, a contract can gather money from multiple transactions.
 For instance, assume :bitml:`"C"` wants to contribute to the payment. 
-We modify the precondition as follows:
+We modify the precondition to add another deposit, as follows:
 
 .. code-block:: bitml
 
 	(contract
 	 (pre (deposit "A" 1 (ref txA))
-	      (deposit "C" 1 "txid:999e1c837c76a1b7fbb7e57baf87b309960f5ffefbf2a9b95dd890602272f644@0"))
+	      (deposit "C" 1 "tx:020000000193c18c921ed3947b862c746ddfe8a8b7459da00825822e09b95c61aaedc71dbf00000000e347304402204b77785e510ab83746732ce435e28a0e46d415ed0ebb8de407c45c66824530bf02202fdf08cd26b5ce376bcb215fe974dddc413be3b74b87e8beae27b1d812c3869d01473044022071b0ced4dd60799531eefe4e61892602637897a18f69f4e5cec22247c59b6c770220768ecc22e772477c8bbd762366d121b0b3d48a3b91334e1a369bbd848373fde3014c516b6b006c766c766b7c6b52210339bd7fade9167e09681d68c5fc80b72166fe55bbb84211fd12bde1d57247fbe121034a7192e922118173906555a39f28fa1e0b65657fc7f403094da4f85701a5f80952aeffffffff01a0bb0d00000000001976a914ce07ee1448bbb80b38ae0c03b6cdeff40ff326ba88ac00000000@0"))
 	 (withdraw "B"))
 
 """""""""""""""""""""""""""""
@@ -65,7 +65,7 @@ To compile the previous contract, first we have to declare the participants ad t
 
 For each participant, |langname| also need a public key for each piece of the contract
 (just :bitml:`(withdraw "B")` in this case). 
-We can ask the compiler to take care of them, using :bitml:`(generate-keys)`.
+We can ask the compiler to take care of generating the keys, using :bitml:`(generate-keys)`.
 
 
 """""""""""""""""""""""""""""""""""""
@@ -85,7 +85,7 @@ a rent to the landlord, to be withdrawn only after the 1st of the month.
 
 	(contract
 	 (pre (deposit "A" 1 (ref txA)))
-	 (after d (withdraw "B")))
+	 (after (ref d) (withdraw "B")))
 
 This contract locks the deposit until the block number :bitml:`d` is added to the blockchain. 
 After then, :bitml:`"B"` can perform action
@@ -104,8 +104,8 @@ the contract. The following contract, instead, allows :bitml:`"A"` to recover he
 	 (pre (deposit "A" 1 (ref txA)))
 
 	 (sum
-	 	(after d (withdraw "B"))
-	 	(after d1 (withdraw "A"))))
+	 	(after (ref d) (withdraw "B"))
+	 	(after (ref d1) (withdraw "A"))))
 
 The contract allows two (mutually exclusive) behaviours: 
 either :bitml:`"A"` or :bitml:`"B"` can withdraw 1 BTC. 
@@ -203,7 +203,7 @@ We can model this behaviour as follows:
 	 (sum
 	   (auth "I" (split (0.1 -> (withdraw "I")) 
 	                    (0.5 -> (withdraw "B"))))
-	    (after d (withdraw "A"))))
+	    (after (ref d) (withdraw "A"))))
 
 
 The first branch can only be taken if :bitml:`"I"` authorizes the payment: in this case,
@@ -254,7 +254,7 @@ persistent deposit, while :bitml:`"A2"` makes available a volatile deposit :bitm
 	 (sum
 	   (put (x) (split (2 -> (withdraw "B")) 
 	                   (1 -> (withdraw "A1"))))
-	    (after d (withdraw "B"))))
+	    (after 700000 (withdraw "B"))))
 
 
 In the first branch, :bitml:`"A2"` puts 1 BTC in the contract, and the balance is split

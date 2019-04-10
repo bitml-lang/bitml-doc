@@ -27,11 +27,16 @@ We start compiling the following contract:
 	 (pre (deposit "A" 0.01 (ref txA)))         
 	 (withdraw "B"))
 
+The transaction output :bitml:`txA` is redeemable by :bitml:`"A"` through her private key. 
+The value :bitml:`"tx:02000000000102f28b8e...0512e2be394297475ed157a9cfc6bdb51600"` is the serialized transaction, 
+which can be obtained through the Bitcoin command line
+or a `block explorer <https://live.blockcypher.com/btc-testnet/tx/2e647d8566f00a08d276488db4f4e2d9f82dd82ef161c2078963d8deb2965e35/>`_.
+
 The contract is a simple transfer of currency: 1 BTC from :bitml:`"A"` deposit is transferred to :bitml:`"B"`.
 Paste the code into a DrRacket window, then hit the "Run" button in the upper right corner.
 
 .. Hint::
-	Don't forget to specify you are using |langname| by starting your file with :bitml:`#lang bitml` 
+	Don't forget to specify you are using |langname| by starting your file with :bitml:`#lang bitml`. 
 
 .. figure:: _static/img/compiled.png
 	:scale: 90 %
