@@ -2,29 +2,106 @@
 Verifying |langname| contracts
 ==============================
 
+Other than compiling contracts to transactions, the |langname| toolchain
+allows to verify contracts before executing them.
+
+A desirable property of smart contracts is liquidity, 
+which requires that the contract balance is always eventually transferred to some participant. 
+In a non-liquidcontract, funds can be frozen forever, unavailable to anyone, hence effectively destroyed. 
+There are many possible flavours of liquidity, depending e.g. on which
+participants are assumed to be honest, and on which are their strategies.
+
+The toolchain can also verify arbitrary security proprieties,
+expressed as LTL queries.
+
 
 """""""""""""""""""""""""""""""
 Liquidity
 """""""""""""""""""""""""""""""
+
+In the following contract, :bitml:`"A"` and :bitml:`"B"` contribute 1 BTC each
+for a donation of 2 BTC to either :bitml:`"C"` or :bitml:`"D"`.
+We want to check if the contract is liquid or not, without supplying any strategy,
+i.e. without knowing which branch :bitml:`"A"` and :bitml:`"B"` will authorize.
+
+This flavour of liquidity is called *strategy-less*.
+Intuitively, it corresponds to check 
+if the contract is liquid for any possible strategy of any participants,
+whether they are honest or not.
+
+To check the liquidity of the following contract, 
+we add :bitml:`(check-liquid)` at its end.
 
 .. code-block:: bitml
 
 	#lang bitml
 
 	(participant "A" "0339bd7fade9167e09681d68c5fc80b72166fe55bbb84211fd12bde1d57247fbe1")
-	(participant "B" "02e76d1d57d47b549d9b297e0a3d71d69139cac2698eb1caa033c5e42322e833d8")
+	(participant "B" "034a7192e922118173906555a39f28fa1e0b65657fc7f403094da4f85701a5f809")
+	(participant "C" "034f5ca30056b9dd89132ca8c7583e6d82b69bc17bb2c1dfef9dea9c3467631e6b")
+	(participant "D" "037b60c121050e1fa6e7d5cd299ecc66d87330b2996567004f831c63ef0e2a157e")
 
 	(generate-keys)
 
-	(define txA "tx:02000000000102f28b8ec15a48abd9cda80d1c770ff9770dc0c549ddb1b8013b9e50a8799614aa000000001716001412a88716720982b693ab2bd2a2fcd4d98bdd2485feffffff08d59c3aeafd6003e6e099adde64f17d6ec7950619c22b50466281afa782e9d4000000001716001433845a8590dbf145b52bdd777103d1ddfdaa9cedfeffffff022fac1f000000000017a914e9f772646a0b6174c936806dab1b882e750ac04a8740420f00000000001976a914ded135b86a7ff97aece531c8b97dc8a3cb3ddc7488ac02473044022060135384eafe9a8021e8b8c46da20e7cd5713d581c3f79b1da3d2f7860a1bfed02206ca1ac1616d7ab778bcbb235b4b24286c2181ec171b8cadeaa9ee5f4f78fd330012102d5f8f263a81427330e7f26ba5832a2cd01e960bf145be2101bc0b6bb0fde8c2d0247304402200e02da2228774b47ff03a5a7c1bf1d070d0cec6cd9a08d6862e1855ba33dfb9f0220011511f10aaefbf402b2944b6a877c1ff9890a7fc3e266bbb74318b4540c555d012103ef2a573fbd46356dcbdbedcecc9aa25dcb500512e2be394297475ed157a9cfc6bdb51600@1")
-
 	(contract
- 	  (pre (deposit "A" 0.01 (ref txA)))         
- 	  (sum
-  	    (auth "A" (withdraw "A"))
-  	    (auth "B" (withdraw "B")))
+	 (pre 
+	   (deposit "A" 1 "txid:2e647d8566f00a08d276488db4f4e2d9f82dd82ef161c2078963d8deb2965e35@1")
+	   (deposit "A" 1 "txid:625bc69c467b33e2ad70ea2817874067604eb42dd5835403f54fb6028bc70168@0"))
+	 
+	 (sum
+	  (auth "A" "B" (withdraw "C"))
+	  (auth "A" "B" (withdraw "D")))
 
-  	  (check-liquid))
+	 (check-liquid))
+
+During the compilation of the contract, the tool-chain checks if its liquid. The result is printed before the transactions in a comment-box.
+
+.. code-block:: balzac
+
+	/*
+	Model checking result for (check-liquid)
+
+	Result: false
+	counterexample({[0 | nil | 'xconf U empty | empty] < (    A, B) : withdraw C + (A, B) : withdraw D, 100000000 BTC > 'xconf,    'C-LockAuthControl} {{A lock withdraw C in 'xconf}[0 | nil | 'xconf U empty    | empty] < Lock((A, B) : withdraw C) + (A, B) : withdraw D, 100000000 BTC >    'xconf,'Rifl} {{A lock withdraw D in 'xconf}[0 | nil | 'xconf U empty |    empty] < Lock((A, B) : withdraw C) + Lock((A, B) : withdraw D), 100000000    BTC > 'xconf,'Finalize}, {[0 | nil | 'xconf U empty | empty] < Lock((A, B)    : withdraw C) + Lock((A, B) : withdraw D), 100000000 BTC > 'xconf,    solution})
+	*/
+
+	// Model checking time: 143.0 ms
+
+As we can see, the contract is not liquid. 
+In fact, In order to unlock the funds, :bitml:`"A"` and :bitml:`"B"` must agree on the recipient of the donation,
+by giving their authorization on the same branch. This contract would be liquid
+only by assuming the cooperation between :bitml:`"A"` and :bitml:`"B"`: indeed, :bitml:`"A"` alone cannot
+guarantee that the 2 BTC will eventually be donated, as :bitml:`"B"` can choose a different
+recipient, or even refuse to give any authorization. 
+
+We can try to modify the contract to handle this situations by adding a timeout branch
+that returns their deposits to :bitml:`"A"` and :bitml:`"B"`. 
+
+.. code-block:: bitml
+
+    (contract
+      (pre 
+        (deposit "A" 1 "txid:2e647d8566f00a08d276488db4f4e2d9f82dd82ef161c2078963d8deb2965e35@1")
+        (deposit "A" 1 "txid:625bc69c467b33e2ad70ea2817874067604eb42dd5835403f54fb6028bc70168@0"))
+	 
+      (sum
+        (auth "A" "B" (withdraw "C"))
+        (auth "A" "B" (withdraw "D"))
+        (after 700000 (split (1 -> (withdraw "A")) (1 -> (withdraw "B")))))
+
+      (check-liquid))
+
+Now the contract is liquid, and the toolchain confirms it.
+
+.. code-block:: balzac
+	
+	/*
+	Model checking result for (check-liquid)
+
+	Result: true
+	*/
+
+	// Model checking time: 322.0 ms
 
 
 """""""""""""""""""""""""""""""
