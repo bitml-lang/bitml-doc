@@ -108,6 +108,70 @@ Now the contract is liquid, and the toolchain confirms it.
 Liquidity with strategies
 """""""""""""""""""""""""""""""
 
+In the following contract, :bitml:`"A"` can reveal her secret and redeem its deposit.
+Otherwise, after a certain amount of time the block number 700000 will be appended to the blockchain,
+:bitml:`"B"` can redeem :bitml:`"A"`'s deposit, after providing his authorization to do so. 
+
+.. code-block:: bitml
+
+	#lang bitml
+
+	(participant "A" "0339bd7fade9167e09681d68c5fc80b72166fe55bbb84211fd12bde1d57247fbe1")
+	(participant "B" "034a7192e922118173906555a39f28fa1e0b65657fc7f403094da4f85701a5f809")
+
+	(generate-keys)
+
+	(contract
+	 (pre 
+	  (deposit "A" 1 "txid:2e647d8566f00a08d276488db4f4e2d9f82dd82ef161c2078963d8deb2965e35@1")
+	  (secret "A" a "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"))
+		 
+	 (sum
+	  (reveal (a) (withdraw "A"))
+	  (after 700000 (auth "B" (withdraw "B"))))
+
+	 (check-liquid))
+
+We start by checking the strategy-less liquidity. The contract is not liquid, 
+because if neither :bitml:`"A"` reveals her secret nor :bitml:`"B"` gives his authorization, 
+the funds will be stuck forever.
+
+.. code-block:: balzac
+
+	/*
+	Model checking result for (check-liquid)
+
+	Result: false
+	Secrets: a:1 
+
+	counterexample({[0 | 700000 | 'xconf U empty | B, A] <    B : after 700000 : withdraw B + put empty reveal a if True . withdraw A,    100000000 BTC > 'xconf | {A : a # 1},'C-LockAuthRev} {{A lock-reveal a}[0 |    700000 | 'xconf U empty | B, A] Lock({A : a # 1}) | < B : after 700000 :    withdraw B + put empty reveal a if True . withdraw A, 100000000 BTC >    'xconf,'Rifl} {{B lock after 700000 : withdraw B in 'xconf}[0 | 700000 |    'xconf U empty | B, A] Lock({A : a # 1}) | < Lock(B : after 700000 :    withdraw B) + put empty reveal a if True . withdraw A, 100000000 BTC >    'xconf,'Rifl} {{delta 700000}[700000 | nil | 'xconf U empty | B, A] Lock({A    : a # 1}) | < Lock(B : after 700000 : withdraw B) + put empty reveal a if    True . withdraw A, 100000000 BTC > 'xconf,'Finalize}, {[700000 | nil |    'xconf U empty | B, A] Lock({A : a # 1}) | < Lock(B : after 700000 :    withdraw B) + put empty reveal a if True . withdraw A, 100000000 BTC >    'xconf,solution})
+	*/
+
+	// Model checking time: 104.0 ms
+
+.. code-block:: bitml
+
+	(contract
+	 (pre 
+	  (deposit "A" 1 "txid:2e647d8566f00a08d276488db4f4e2d9f82dd82ef161c2078963d8deb2965e35@1")
+	  (secret "A" a "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"))
+		 
+	 (sum
+	  (reveal (a) (withdraw "A"))
+	  (after 700000 (auth "B" (withdraw "B"))))
+
+	 (check-liquid
+	  (strategy "A" (do-reveal a))))
+
+.. code-block:: balzac
+
+	/*
+	Model checking result for (check-liquid (strategy A (do-reveal a)))
+
+	Result: true
+	*/
+
+	// Model checking time: 90.0 ms
 
 
 """""""""""""""""""""""""""""""
