@@ -123,17 +123,17 @@ withdraw will get the money.
 Authorizing payments
 """""""""""""""""""""""""""""""""""""
 Assume that :bitml:`"A"` is willing to pay 1 BTC to :bitml:`"A"`, 
-but only if another participant :bitml:`"O"` gives
-his authorization. We can use the following contract:
+but only if an :bitml:`"Oracle"` gives his authorization.
+We can use the authorization primitive :bitml:`auth Participant Contract` as follows:
 
 .. code-block:: bitml
 
 	(contract
 	 (pre (deposit "A" 1 (ref txA)))
-	 (auth "O" (withdraw "B")))
+	 (auth "Oracle" (withdraw "B")))
 
-The semantics of contracts ensures that withdraw :bitml:`"(withdraw "B")"` 
-can be performed only if :bitml:`"O"` authorizes it.
+This contract ensures that :bitml:`(withdraw "B")` 
+is performed whenever :bitml:`"Oracle"` authorizes it.
 
 We can play with authorizations and summations to construct more complex
 contracts. For instance, assume we want to design an *escrow* contract, which
