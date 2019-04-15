@@ -2,26 +2,31 @@
 |langname| in a nutshell
 =========================
 
-BitML contracts allow two or more participants (denoted as :bitml:`"A"`, :bitml:`"B"`, ...)
-to exchange their bitcoins according to complex pre-agreed rules.
+BitML contracts allow two or more participants to exchange
+their bitcoins according to complex pre-agreed rules.
+Below we illustrate the primitives of BitML through a series of
+simple examples.
+See [CCS18]_ for a reference to BitML syntax and semantics.
+
 
 """""""""""""""""""""""""""""""
-Direct payment
+Simple payments
 """""""""""""""""""""""""""""""
 
-Assume that :bitml:`"A"` wants to give 1 BTC to :bitml:`"B"` through a contract. 
-To this purpose, :bitml:`"A"` first declares that she owns
+Assume that a participant :bitml:`"A"` simply wants to donate 1 BTC
+to another participant :bitml:`"B"`. 
+To this purpose, :bitml:`"A"` must first declare that she owns
 a transaction output with 1 BTC.
-We define this transaction output as follows:
+We can define this transaction output as follows:
 
 .. code-block:: bitml
 
 	(define txA "tx:02000000000102f28b8ec15a48abd9cda80d1c770ff9770dc0c549ddb1b8013b9e50a8799614aa000000001716001412a88716720982b693ab2bd2a2fcd4d98bdd2485feffffff08d59c3aeafd6003e6e099adde64f17d6ec7950619c22b50466281afa782e9d4000000001716001433845a8590dbf145b52bdd777103d1ddfdaa9cedfeffffff022fac1f000000000017a914e9f772646a0b6174c936806dab1b882e750ac04a8740420f00000000001976a914ded135b86a7ff97aece531c8b97dc8a3cb3ddc7488ac02473044022060135384eafe9a8021e8b8c46da20e7cd5713d581c3f79b1da3d2f7860a1bfed02206ca1ac1616d7ab778bcbb235b4b24286c2181ec171b8cadeaa9ee5f4f78fd330012102d5f8f263a81427330e7f26ba5832a2cd01e960bf145be2101bc0b6bb0fde8c2d0247304402200e02da2228774b47ff03a5a7c1bf1d070d0cec6cd9a08d6862e1855ba33dfb9f0220011511f10aaefbf402b2944b6a877c1ff9890a7fc3e266bbb74318b4540c555d012103ef2a573fbd46356dcbdbedcecc9aa25dcb500512e2be394297475ed157a9cfc6bdb51600@1")
 
-where :bitml:`"02000000000102f28b...4297475ed157a9cfc6bdb51600"`
+In the definition above, :bitml:`"02000000000102f28b...4297475ed157a9cfc6bdb51600"`
 are the bytes of the serialized transaction, and the trailing :bitml:`"@0"` is the index of the output.
-	
-The contract is the following:
+
+The contract advertised by :bitml:`"A"` is the following:
 
 .. code-block:: bitml
 
@@ -29,18 +34,18 @@ The contract is the following:
 	 (pre (deposit "A" 1 (ref txA)))
 	 (withdraw "B"))
 
-The precondition :bitml:`(pre (deposit "A" 1 (ref txA)))`
-of the contract declares that :bitml:`"A"`
-agrees to transfer 1 BTC under the control of the contract.
+The contract precondition :bitml:`(pre (deposit "A" 1 (ref txA)))`
+declares that :bitml:`"A"`
+agrees to transfer the 1 BTC referenced by the transaction output :bitml:`txA`
+under the control of the contract.
 The actual contract is :bitml:`(withdraw "B")`:
-this just transfers the funds deposited into the contract to
-participant :bitml:`"B"`.
+this just transfers the funds deposited into the contract to :bitml:`"B"`.
 
 
-In the previous contract, the initial deposit has been provided by a transaction output, 
-but more in general, a contract can gather money from multiple transactions.
-For instance, assume :bitml:`"C"` wants to contribute to the payment. 
-We modify the precondition to add another deposit, as follows:
+In the previous contract, the initial deposit has been provided by a transaction output;
+more in general, a contract can gather money from more than one transaction.
+For instance, assume that another participant :bitml:`"C"` wants to contribute 1 BTC to the donation.
+The contract precondition is modified as follows:
 
 .. code-block:: bitml
 
