@@ -2,14 +2,10 @@
 BitML Toolchain
 ********************
 
-|langname| is a domain specific language for specifying smart contracts 
-that can be executed on Bitcoin [18CCS]_.
-The language is computationally sound, i.e. a vulnerability at the computational level 
-can be detected at the symbolic level, allowing us to verify |langname| smart contracts.
-
-The toolchain consists of:
-
-* A compiler, to translate contracts into *standard* Bitcoin transaction
+|langname| is a domain-specific language for Bitcoin smart contracts, introduced in [18CCS]_.
+The |langname| toolchain implements:
+* A compiler which translates |langname| contracts into *standard* Bitcoin transaction. The compiler is computationally sound, i.e. a vulnerability at the computational level 
+can be detected at the symbolic level, allowing us to verify |langname| smart contracts
 * A verifier, to verify security properties of contract.
 
 The toolchain supports the verification of the various forms of *liquidity* [19POST]_,
