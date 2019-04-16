@@ -5,9 +5,9 @@ Verifying |langname| contracts
 Other than compiling contracts to transactions, the |langname| toolchain
 allows to verify contracts before executing them.
 
-A desirable property of smart contracts is liquidity, 
+A desirable property of smart contracts is **liquidity**, 
 which requires that the contract balance is always eventually transferred to some participant. 
-In a non-liquidcontract, funds can be frozen forever, unavailable to anyone, hence effectively destroyed. 
+In a non-liquid contract, funds can be frozen forever, unavailable to anyone, hence effectively destroyed. 
 There are many possible flavours of liquidity, depending e.g. on which
 participants are assumed to be honest, and on which are their strategies.
 
@@ -24,7 +24,7 @@ for a donation of 2 BTC to either :bitml:`"C"` or :bitml:`"D"`.
 We want to check if the contract is liquid or not, without supplying any strategy,
 i.e. without knowing which branch :bitml:`"A"` and :bitml:`"B"` will authorize.
 
-This flavour of liquidity is called *strategy-less*.
+This flavour of liquidity is called **strategy-less**.
 Intuitively, it corresponds to check 
 if the contract is liquid for any possible strategy of any participants,
 whether they are honest or not.
@@ -62,9 +62,9 @@ During the compilation of the contract, the tool-chain checks if it is liquid. T
 	Model checking result for (check-liquid)
 
 	Result: false
-	counterexample({[0 | nil | 'xconf U empty | empty] < (    A, B) : withdraw C + (A, B) : withdraw D, 100000000 BTC > 'xconf,    
-	'C-LockAuthControl} {{A lock withdraw C in 'xconf}[0 | nil | 'xconf U empty    | empty] < Lock((A, B) : withdraw C) + (A, B) : withdraw D, 100000000 BTC >    
-	'xconf,'Rifl} {{A lock withdraw D in 'xconf}[0 | nil | 'xconf U empty |    empty] < Lock((A, B) : withdraw C) + Lock((A, B) : withdraw D), 100000000    BTC > 'xconf,'Finalize}, {[0 | nil | 'xconf U empty | empty] < Lock((A, B)    : withdraw C) + Lock((A, B) : withdraw D), 100000000 BTC > 'xconf,    solution})
+	counterexample({[0 | nil | 'xconf U empty | empty] < (    A, B) : withdraw C + (A, B) : withdraw D, 100000000 satoshi > 'xconf,    
+	'C-LockAuthControl} {{A lock withdraw C in 'xconf}[0 | nil | 'xconf U empty    | empty] < Lock((A, B) : withdraw C) + (A, B) : withdraw D, 100000000 satoshi >    
+	'xconf,'Rifl} {{A lock withdraw D in 'xconf}[0 | nil | 'xconf U empty |    empty] < Lock((A, B) : withdraw C) + Lock((A, B) : withdraw D), 100000000    satoshi > 'xconf,'Finalize}, {[0 | nil | 'xconf U empty | empty] < Lock((A, B)    : withdraw C) + Lock((A, B) : withdraw D), 100000000 satoshi > 'xconf,    solution})
 	Model checking time: 143.0 ms
 	=============================================================================*/
 
@@ -148,12 +148,12 @@ the funds will be stuck forever.
 	Result: false
 	Secrets: a:1 
 
-	counterexample({[0 | 700000 | 'xconf U empty | B, A] <    B : after 700000 : withdraw B + put empty reveal a if True . withdraw A,    100000000 BTC > 'xconf | {A : a # 1},'C-LockAuthRev} {{A lock-reveal a}[0 |    700000 | 'xconf U empty | B, A] Lock({A : a # 1}) | < B : after 700000 :    withdraw B + put empty reveal a if True . withdraw A, 100000000 BTC >    'xconf,'Rifl} {{B lock after 700000 : withdraw B in 'xconf}[0 | 700000 |    'xconf U empty | B, A] Lock({A : a # 1}) | < Lock(B : after 700000 :    withdraw B) + put empty reveal a if True . withdraw A, 100000000 BTC >    'xconf,'Rifl} {{delta 700000}[700000 | nil | 'xconf U empty | B, A] Lock({A    : a # 1}) | < Lock(B : after 700000 : withdraw B) + put empty reveal a if    True . withdraw A, 100000000 BTC > 'xconf,'Finalize}, {[700000 | nil |    'xconf U empty | B, A] Lock({A : a # 1}) | < Lock(B : after 700000 :    withdraw B) + put empty reveal a if True . withdraw A, 100000000 BTC >    'xconf,solution})
+	counterexample({[0 | 700000 | 'xconf U empty | B, A] <    B : after 700000 : withdraw B + put empty reveal a if True . withdraw A,    100000000 satoshi > 'xconf | {A : a # 1},'C-LockAuthRev} {{A lock-reveal a}[0 |    700000 | 'xconf U empty | B, A] Lock({A : a # 1}) | < B : after 700000 :    withdraw B + put empty reveal a if True . withdraw A, 100000000 satoshi >    'xconf,'Rifl} {{B lock after 700000 : withdraw B in 'xconf}[0 | 700000 |    'xconf U empty | B, A] Lock({A : a # 1}) | < Lock(B : after 700000 :    withdraw B) + put empty reveal a if True . withdraw A, 100000000 satoshi >    'xconf,'Rifl} {{delta 700000}[700000 | nil | 'xconf U empty | B, A] Lock({A    : a # 1}) | < Lock(B : after 700000 : withdraw B) + put empty reveal a if    True . withdraw A, 100000000 satoshi > 'xconf,'Finalize}, {[700000 | nil |    'xconf U empty | B, A] Lock({A : a # 1}) | < Lock(B : after 700000 :    withdraw B) + put empty reveal a if True . withdraw A, 100000000 satoshi >    'xconf,solution})
 	Model checking time: 104.0 ms
 	=============================================================================*/
 
 
-The |langname| toolchain allows us to specify the intended behaviour of a participant, called *strategy*.
+The |langname| toolchain allows us to specify the intended behaviour of a participant, called **strategy**.
 The security propriety is verified with respect to the specified strategies.
 
 We check if the contract is liquid if the strategy of :bitml:`"A"`
@@ -255,6 +255,12 @@ assuming that she reveals her secret. We check it using :bitml:`(check "A" has-m
 Custom LTL queries
 """""""""""""""""""""""""""""""
 
+The following contract is a *timed commitment*, 
+where :bitml:`"A"` wants to choose a secret :balzac:`a`, 
+and reveal it before the deadline :balzac:`d`; 
+if :bitml:`"A"` does notreveal the secret within :balzac:`d`, 
+:bitml:`"B"` can redeem the 1 BTC deposit as a compensation.
+
 .. code-block:: bitml
 
 	#lang bitml
@@ -264,26 +270,52 @@ Custom LTL queries
 
 	(generate-keys)
 
+	(define d 700000)
+
 	(contract
 	 (pre (deposit "A" 1 "txA@0")(secret "A" a "000a"))
 	 
 	 (sum (reveal (a) (withdraw "A"))
-	      (after 10 (withdraw "B")))
+	      (after (ref d) (withdraw "B")))
 
-	 (check-query "[]<> (a revealed => A has-deposit>= 100000000 BTC)")
+	 (check-query "[]<> (a revealed => A has-deposit>= 100000000 satoshi)")
 
-	 (check-query "[]<> (a revealed \\/ B has-deposit>= 100000000 BTC)"))
+	 (check-query "[]<> (a revealed \\/ B has-deposit>= 100000000 satoshi)"))
+
+The |langname| toolchain allows us to check custom LTL properties, 
+tailored specifically for the contract being verified, using :bitml:`(check-query "query")`. 
+
+In the timed commitment contract, we want the following two properties to be satisfied.
+
+* 	If :bitml:`"A"` reveal her secret, she will get back her deposit. 
+	We check this property with :bitml:`(check-query "[]<> (a revealed => A has-deposit>= 100000000 satoshi)")`.
+
+* 	Either :bitml:`"B"` gets to know the secret, or he will get the bitcoin as compensation. 
+	We check this property with :bitml:`(check-query "[]<> (a revealed \\/ B has-deposit>= 100000000 satoshi)"))`.
+
+.. note::
+
+	Due to the internal representation of numbers in the model check, all BTC values have to be expressed in **satoshi** when checking custom LTL queries.
+
+The result is true for both queries: 
 
 .. code-block:: balzac
 
 	/*=============================================================================
-	Model checking result for (check-query []<> (a revealed => A has-deposit>= 100000000 BTC))
+	Model checking result for (check-query [] (a revealed => <> A has-deposit>= 100000000 satoshi))
 
 	Result: true
 
 	/*=============================================================================
-	Model checking result for (check-query []<> (a revealed \/ B has-deposit>= 100000000 BTC))
+	Model checking result for (check-query []<> (a revealed \/ B has-deposit>= 100000000 satoshi))
 
 	Result: true
 	Model checking time: 408.0 ms
 	=============================================================================*/
+
+The first LTL property has the same semantic as checking the quantitative liquidity of 1 BTC
+if the strategy of :bitml:`"A"` is to reveal her secret, or
+:bitml:`(check "A" has-more-than 1 (strategy "A" (do-reveal a)))`.
+Instead, the second LTL property cannot be expressed as a combination of liquidity and strategies.
+
+Other that :balzac:`revealed` and :balzac:`has-deposit>=`, you can express your LTL properties with :balzac:`has-deposit`, and :balzac:`has-deposit<=`.
