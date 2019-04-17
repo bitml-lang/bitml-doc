@@ -17,12 +17,14 @@ For instance, we can declare three participants :bitml:`"A"`, :bitml:`"B"` and :
 	(participant "B" "0316589526daa876ef27937e48176da08fc95eaef7315fa20a07114d5fb8866553")
 	(participant "C" "03c7e157beee3815300c678840988713c9928d986b26fe0dc2533f304c19268a2f")
 
-	(generate-keys)
+	(debug-mode)
 
 Each participant is associated to a public key: for instance, :bitml:`"A"`
 has the public key :bitml:`"029c...cced"`.
-The command :bitml:`(generate-keys)` is needed to generate auxiliary keys,
-which are used by the BitML compiler.
+The command :bitml:`(debug-mode)` is needed to generate auxiliary keys
+which are used by the BitML compiler,
+instead of declaring them as you are supposed to when executing a contract in 
+a real life scenario.
 
 
 """""""""""""""""""""""""""""""

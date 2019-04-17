@@ -41,7 +41,7 @@ we add :bitml:`(check-liquid)` at its end.
 	(participant "C" "034f5ca30056b9dd89132ca8c7583e6d82b69bc17bb2c1dfef9dea9c3467631e6b")
 	(participant "D" "037b60c121050e1fa6e7d5cd299ecc66d87330b2996567004f831c63ef0e2a157e")
 
-	(generate-keys)
+	(debug-mode)
 
 	(contract
 	 (pre 
@@ -122,7 +122,7 @@ Otherwise, after a certain amount of time the block number 700000 will be append
 	(participant "A" "0339bd7fade9167e09681d68c5fc80b72166fe55bbb84211fd12bde1d57247fbe1")
 	(participant "B" "034a7192e922118173906555a39f28fa1e0b65657fc7f403094da4f85701a5f809")
 
-	(generate-keys)
+	(debug-mode)
 
 	(contract
 	 (pre 
@@ -170,7 +170,7 @@ with the strategy :bitml:`(strategy "B" (do-auth (auth "B"(after 700000 (withdra
 	(participant "A" "0339bd7fade9167e09681d68c5fc80b72166fe55bbb84211fd12bde1d57247fbe1")
 	(participant "B" "034a7192e922118173906555a39f28fa1e0b65657fc7f403094da4f85701a5f809")
 
-	(generate-keys)
+	(debug-mode)
 
 	(contract
 	  (pre 
@@ -223,7 +223,7 @@ Each of them will get their own BTC back if they reveal their secret.
 	(participant "A" "0339bd7fade9167e09681d68c5fc80b72166fe55bbb84211fd12bde1d57247fbe1")
 	(participant "B" "034a7192e922118173906555a39f28fa1e0b65657fc7f403094da4f85701a5f809")
 
-	(generate-keys)
+	(debug-mode)
 
 	(contract
 	  (pre 
@@ -268,7 +268,7 @@ if :bitml:`"A"` does notreveal the secret within :balzac:`d`,
 	(participant "A" "029c5f6f5ef0095f547799cb7861488b9f4282140d59a6289fbc90c70209c1cced")
 	(participant "B" "022c3afb0b654d3c2b0e2ffdcf941eaf9b6c2f6fcf14672f86f7647fa7b817af30")
 
-	(generate-keys)
+	(debug-mode)
 
 	(define d 700000)
 
