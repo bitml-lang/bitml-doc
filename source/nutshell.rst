@@ -5,16 +5,31 @@
 BitML contracts allow two or more participants to exchange
 their bitcoins according to complex pre-agreed rules.
 Below we illustrate the primitives of BitML through a series of
-simple examples.
-See [CCS18]_ for a reference to BitML syntax and semantics.
+simple examples
+(see [CCS18]_ for a reference to BitML syntax and semantics).
+
+The first step in designing a BitML contract is to declare the involved participants.
+For instance, we can declare three participants :bitml:`"A"`, :bitml:`"B"` and :bitml:`"C"` as follows:
+
+.. code-block:: bitml
+
+	(participant "A" "029c5f6f5ef0095f547799cb7861488b9f4282140d59a6289fbc90c70209c1cced")
+	(participant "B" "0316589526daa876ef27937e48176da08fc95eaef7315fa20a07114d5fb8866553")
+	(participant "C" "03c7e157beee3815300c678840988713c9928d986b26fe0dc2533f304c19268a2f")
+
+	(generate-keys)
+
+Each participant is associated to a public key: for instance, :bitml:`"A"`
+has the public key :bitml:`"029c...cced"`.
+The command :bitml:`(generate-keys)` is needed to generate auxiliary keys,
+which are used by the BitML compiler.
 
 
 """""""""""""""""""""""""""""""
 Simple payments
 """""""""""""""""""""""""""""""
 
-Assume that a participant :bitml:`"A"` simply wants to donate 1 BTC
-to another participant :bitml:`"B"`. 
+Assume that :bitml:`"A"` simply wants to donate 1 BTC to :bitml:`"B"`. 
 To this purpose, :bitml:`"A"` must first declare that she owns
 a transaction output with 1 BTC.
 We can define this transaction output as follows:
@@ -54,70 +69,61 @@ The contract precondition is modified as follows:
 	      (deposit "C" 1 "tx:020000000193c18c921ed3947b862c746ddfe8a8b7459da00825822e09b95c61aaedc71dbf00000000e347304402204b77785e510ab83746732ce435e28a0e46d415ed0ebb8de407c45c66824530bf02202fdf08cd26b5ce376bcb215fe974dddc413be3b74b87e8beae27b1d812c3869d01473044022071b0ced4dd60799531eefe4e61892602637897a18f69f4e5cec22247c59b6c770220768ecc22e772477c8bbd762366d121b0b3d48a3b91334e1a369bbd848373fde3014c516b6b006c766c766b7c6b52210339bd7fade9167e09681d68c5fc80b72166fe55bbb84211fd12bde1d57247fbe121034a7192e922118173906555a39f28fa1e0b65657fc7f403094da4f85701a5f80952aeffffffff01a0bb0d00000000001976a914ce07ee1448bbb80b38ae0c03b6cdeff40ff326ba88ac00000000@0"))
 	 (withdraw "B"))
 
-"""""""""""""""""""""""""""""
-Declaring participants
-"""""""""""""""""""""""""""""
-
-To compile the previous contract, first we have to declare the participants ad their public keys.
-
-.. code-block:: bitml
-
-	(participant "A" "029c5f6f5ef0095f547799cb7861488b9f4282140d59a6289fbc90c70209c1cced")
-	(participant "B" "0316589526daa876ef27937e48176da08fc95eaef7315fa20a07114d5fb8866553")
-	(participant "C" "03c7e157beee3815300c678840988713c9928d986b26fe0dc2533f304c19268a2f")
-
-	(generate-keys)
-
-For each participant, |langname| also need a public key for each piece of the contract
-(just :bitml:`(withdraw "B")` in this case). 
-We can ask the compiler to take care of generating the keys, using :bitml:`(generate-keys)`.
-
 
 """""""""""""""""""""""""""""""""""""
 Procrastinating payments
 """""""""""""""""""""""""""""""""""""
 
-Assume now that :bitml:`"A"` wants to stipulate a contract where she commits herself to
-give 1 BTC to :bitml:`"B"` after a certain block number :bitml:`d`. 
-For instance, this contract could represent a
-birthday present to be withdrawn only after the birthday date; or the paying of
-a rent to the landlord, to be withdrawn only after the 1st of the month. 
-:bitml:`"A"` can use the following contract:
+Assume now that :bitml:`"A"` wants to donate 1 BTC to :bitml:`"B"`,
+but only after a certain time :bitml:`t`.
+For instance, the 1 BTC could be a birthday present to be withdrawn
+only after the birthday date; or the amount of a rent to the landlord,
+to be paid only after the 1st of the month.
+We represent the time :bitml:`t` as a `block height <https://bitcoin.org/en/glossary/block-height>`_.
+For instance, we set :bitml:`t` to 500000
+(note that the block at this height was actually mined on  
+`2017-12-18 <https://www.blockchain.com/btc/block-height/500000>`_).
+
+To craft this contract we use the primitive :bitml:`after height contract`,
+which locks the :bitml:`contract` until
+the block at the given :bitml:`height` is appended to the blockchain.
+We also reuse the transaction output :bitml:`txA` from the previous example:
 
 .. code-block:: bitml
 
-	(define d 700000)
+	(define d 500000)
 
 	(contract
 	 (pre (deposit "A" 1 (ref txA)))
-	 (after (ref d) (withdraw "B")))
+	 (after (ref t) (withdraw "B")))
 
-This contract locks the deposit until the block number :bitml:`d` is added to the blockchain. 
-After then, :bitml:`"B"` can perform action
-:bitml:`(withdraw "B")` to redeem 1 BTC from the contract, with no further time limitations.
+This contract ensures that only after
+the block at height :bitml:`t` has been appended to the blockchain,
+:bitml:`"B"` will be able to redeem 1 BTC from the contract,
+by performing the action :bitml:`(withdraw "B")`.
 
-In the previous contract, if :bitml:`"B"` forgets to withdraw, the money remains within
-the contract. The following contract, instead, allows :bitml:`"A"` to recover her money if
-:bitml:`"B"` has not withdrawn within a given deadline :bitml:`d1` > :bitml:`d`:
+The following contract allows :bitml:`"A"` to recover her deposit if
+:bitml:`"B"` has not withdrawn within a given deadline :bitml:`t1` > :bitml:`t`:
 
 .. code-block:: bitml
 
-	(define d 700000)
-	(define d1 705000)
+	(define t 500000)
+	(define t1 510000)
 
 	(contract
 	 (pre (deposit "A" 1 (ref txA)))
 
 	 (sum
-	 	(after (ref d) (withdraw "B"))
-	 	(after (ref d1) (withdraw "A"))))
+	 	(after (ref t) (withdraw "B"))
+	 	(after (ref t1) (withdraw "A"))))
 
 The contract allows two (mutually exclusive) behaviours: 
 either :bitml:`"A"` or :bitml:`"B"` can withdraw 1 BTC. 
-Before the deadline :bitml:`d` no one can withdraw; 
-after :bitml:`d` (but before :bitml:`d1`) only :bitml:`"B"` can withdraw, while after
-the :bitml:`d1` both withdraw actions are enabled, so the first one who performs their
-withdraw will get the money.
+Before the deadline :bitml:`t` no one can withdraw; 
+after :bitml:`t` (but before :bitml:`t1`) only :bitml:`"B"` can withdraw,
+while after the :bitml:`t1` both withdraw actions are enabled,
+so the first one who performs their withdraw will get the money.
+
 
 """""""""""""""""""""""""""""""""""""
 Authorizing payments
