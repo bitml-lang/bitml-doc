@@ -38,7 +38,7 @@ We can define this transaction output as follows:
 
 .. code-block:: bitml
 
-	(define txA "tx:02000000000102f28b8ec15a48abd9cda80d1c770ff9770dc0c549ddb1b8013b9e50a8799614aa000000001716001412a88716720982b693ab2bd2a2fcd4d98bdd2485feffffff08d59c3aeafd6003e6e099adde64f17d6ec7950619c22b50466281afa782e9d4000000001716001433845a8590dbf145b52bdd777103d1ddfdaa9cedfeffffff022fac1f000000000017a914e9f772646a0b6174c936806dab1b882e750ac04a8740420f00000000001976a914ded135b86a7ff97aece531c8b97dc8a3cb3ddc7488ac02473044022060135384eafe9a8021e8b8c46da20e7cd5713d581c3f79b1da3d2f7860a1bfed02206ca1ac1616d7ab778bcbb235b4b24286c2181ec171b8cadeaa9ee5f4f78fd330012102d5f8f263a81427330e7f26ba5832a2cd01e960bf145be2101bc0b6bb0fde8c2d0247304402200e02da2228774b47ff03a5a7c1bf1d070d0cec6cd9a08d6862e1855ba33dfb9f0220011511f10aaefbf402b2944b6a877c1ff9890a7fc3e266bbb74318b4540c555d012103ef2a573fbd46356dcbdbedcecc9aa25dcb500512e2be394297475ed157a9cfc6bdb51600@1")
+	(define (txA) "tx:02000000000102f28b8ec15a48abd9cda80d1c770ff9770dc0c549ddb1b8013b9e50a8799614aa000000001716001412a88716720982b693ab2bd2a2fcd4d98bdd2485feffffff08d59c3aeafd6003e6e099adde64f17d6ec7950619c22b50466281afa782e9d4000000001716001433845a8590dbf145b52bdd777103d1ddfdaa9cedfeffffff022fac1f000000000017a914e9f772646a0b6174c936806dab1b882e750ac04a8740420f00000000001976a914ded135b86a7ff97aece531c8b97dc8a3cb3ddc7488ac02473044022060135384eafe9a8021e8b8c46da20e7cd5713d581c3f79b1da3d2f7860a1bfed02206ca1ac1616d7ab778bcbb235b4b24286c2181ec171b8cadeaa9ee5f4f78fd330012102d5f8f263a81427330e7f26ba5832a2cd01e960bf145be2101bc0b6bb0fde8c2d0247304402200e02da2228774b47ff03a5a7c1bf1d070d0cec6cd9a08d6862e1855ba33dfb9f0220011511f10aaefbf402b2944b6a877c1ff9890a7fc3e266bbb74318b4540c555d012103ef2a573fbd46356dcbdbedcecc9aa25dcb500512e2be394297475ed157a9cfc6bdb51600@1")
 
 In the definition above, :bitml:`"02000000000102f28b...4297475ed157a9cfc6bdb51600"`
 are the bytes of the serialized transaction, and the trailing :bitml:`"@0"` is the index of the output.
@@ -48,10 +48,10 @@ The contract advertised by :bitml:`"A"` is the following:
 .. code-block:: bitml
 
 	(contract
-	 (pre (deposit "A" 1 (ref txA)))
+	 (pre (deposit "A" 1 (ref (txA))))
 	 (withdraw "B"))
 
-The contract precondition :bitml:`(pre (deposit "A" 1 (ref txA)))`
+The contract precondition :bitml:`(pre (deposit "A" 1 (ref (txA))))`
 declares that :bitml:`"A"`
 agrees to transfer the 1 BTC referenced by the transaction output :bitml:`txA`
 under the control of the contract.
@@ -67,7 +67,7 @@ The contract precondition is modified as follows:
 .. code-block:: bitml
 
 	(contract
-	 (pre (deposit "A" 1 (ref txA))
+	 (pre (deposit "A" 1 (ref (txA)))
 	      (deposit "C" 1 "tx:020000000193c18c921ed3947b862c746ddfe8a8b7459da00825822e09b95c61aaedc71dbf00000000e347304402204b77785e510ab83746732ce435e28a0e46d415ed0ebb8de407c45c66824530bf02202fdf08cd26b5ce376bcb215fe974dddc413be3b74b87e8beae27b1d812c3869d01473044022071b0ced4dd60799531eefe4e61892602637897a18f69f4e5cec22247c59b6c770220768ecc22e772477c8bbd762366d121b0b3d48a3b91334e1a369bbd848373fde3014c516b6b006c766c766b7c6b52210339bd7fade9167e09681d68c5fc80b72166fe55bbb84211fd12bde1d57247fbe121034a7192e922118173906555a39f28fa1e0b65657fc7f403094da4f85701a5f80952aeffffffff01a0bb0d00000000001976a914ce07ee1448bbb80b38ae0c03b6cdeff40ff326ba88ac00000000@0"))
 	 (withdraw "B"))
 
@@ -93,11 +93,11 @@ We also reuse the transaction output :bitml:`txA` from the previous example:
 
 .. code-block:: bitml
 
-	(define d 500000)
+	(define (d) 500000)
 
 	(contract
-	 (pre (deposit "A" 1 (ref txA)))
-	 (after (ref t) (withdraw "B")))
+	 (pre (deposit "A" 1 (ref (txA))))
+	 (after (ref (t)) (withdraw "B")))
 
 This contract ensures that only after
 the block at height :bitml:`t` has been appended to the blockchain,
@@ -109,15 +109,15 @@ The following contract allows :bitml:`"A"` to recover her deposit if
 
 .. code-block:: bitml
 
-	(define t 500000)
-	(define t1 510000)
+	(define (t) 500000)
+	(define (t1) 510000)
 
 	(contract
-	 (pre (deposit "A" 1 (ref txA)))
+	 (pre (deposit "A" 1 (ref (txA))))
 
 	 (sum
-	 	(after (ref t) (withdraw "B"))
-	 	(after (ref t1) (withdraw "A"))))
+	 	(after (ref (t)) (withdraw "B"))
+	 	(after (ref (t1)) (withdraw "A"))))
 
 The contract allows two (mutually exclusive) behaviours: 
 either :bitml:`"A"` or :bitml:`"B"` can withdraw 1 BTC. 
@@ -137,7 +137,7 @@ We can use the authorization primitive :bitml:`auth Participant Contract` as fol
 .. code-block:: bitml
 
 	(contract
-	 (pre (deposit "A" 1 (ref txA)))
+	 (pre (deposit "A" 1 (ref (txA))))
 	 (auth "Oracle" (withdraw "B")))
 
 This contract ensures that :bitml:`(withdraw "B")` 
@@ -152,7 +152,7 @@ with the item. A naïve attempt to model this contract is the following:
 
 .. code-block:: bitml
 
-	(define Naive-escrow 
+	(define (Naive-escrow) 
 	  (sum
 	    (auth "A" (withdraw "B"))
 	    (auth "B" (withdraw "A"))))
@@ -165,15 +165,15 @@ escrow contract, by introducing a trusted arbiter :bitml:`"O"` which resolves th
 
 .. code-block:: bitml
 
-	(define Oracle-escrow 
+	(define (Oracle-escrow) 
 	  (sum
-	    (ref Naive-escrow)
+	    (ref (Naive-escrow))
 	    (auth "O" (withdraw "A"))
 	    (auth "O" (withdraw "B"))))
 
 	(contract
-	 (pre (deposit "A" 1 (ref txA)))
-	 (ref Oracle-escrow))
+	 (pre (deposit "A" 1 (ref (txA))))
+	 (ref (Oracle-escrow)))
 
 The last two branches are used if neither :bitml:`"A"` nor :bitml:`"B"` give their authorizations: in
 this case, the arbiter chooses whether to authorize :bitml:`"A"` or :bitml:`"B"` to redeem the deposit.
@@ -190,7 +190,7 @@ We can model this behaviour as follows:
 
 .. code-block:: bitml
 
-	(define Pay-split 
+	(define (Pay-split) 
 	  (split
 	    (0.5 -> (withdraw "B1"))
 	    (0.5 -> (withdraw "B2"))))
@@ -212,11 +212,11 @@ We can model this behaviour as follows:
 .. code-block:: bitml
 
 	(contract
-	 (pre (deposit "A" 1 (ref txA)))
+	 (pre (deposit "A" 1 (ref (txA))))
 	 (sum
 	   (auth "I" (split (0.1 -> (withdraw "I")) 
 	                    (0.5 -> (withdraw "B"))))
-	    (after (ref d) (withdraw "A"))))
+	    (after (ref (d)) (withdraw "A"))))
 
 
 The first branch can only be taken if :bitml:`"I"` authorizes the payment: in this case,
@@ -235,8 +235,8 @@ deposits, which are not assimilated upon stipulation. For instance:
 
 .. code-block:: bitml
 
-	(pre (deposit "A" 1 (ref txA1))
-	     (vol-deposit "A" x 1 (ref txA2)))
+	(pre (deposit "A" 1 (ref (txA1)))
+	     (vol-deposit "A" x 1 (ref (txA2))))
 
 
 gives :bitml:`"A"` the possibility of contributing 1 BTC during the contract execution. 
@@ -245,7 +245,7 @@ The variable :bitml:`x` is a handle to the volatile deposit, which can be used a
 
 .. code-block:: bitml
 
-	(define Pay?
+	(define (Pay?)
 	  (put (x) (withdraw "B")))
 
 Since :bitml:`x` is not paid upfront, there is no guarantee that :bitml:`x` will be
@@ -262,8 +262,8 @@ persistent deposit, while :bitml:`"A2"` makes available a volatile deposit :bitm
 .. code-block:: bitml
 
 	(contract
-	 (pre (deposit "A1" 2 (ref txA1))
-	      (vol-deposit "A2" x 1 (ref txA2)))
+	 (pre (deposit "A1" 2 (ref (txA1)))
+	      (vol-deposit "A2" x 1 (ref (txA2))))
 	 (sum
 	   (put (x) (split (2 -> (withdraw "B")) 
 	                   (1 -> (withdraw "A1"))))
@@ -298,7 +298,7 @@ itself. A basic contract which exploits this feature is the following:
 
 .. code-block:: bitml
 
-	(define PaySecret
+	(define (PaySecret)
 	  (reveal (a) (pred (> a 1)) (withdraw "A")))
 
 This contract asks :bitml:`"A"` to commit to a secret of length greater than one,

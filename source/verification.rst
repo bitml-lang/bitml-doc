@@ -270,13 +270,13 @@ if :bitml:`"A"` does notreveal the secret within :balzac:`d`,
 
 	(debug-mode)
 
-	(define d 700000)
+	(define (d) 700000)
 
 	(contract
 	 (pre (deposit "A" 1 "txA@0")(secret "A" a "000a"))
 	 
 	 (sum (reveal (a) (withdraw "A"))
-	      (after (ref d) (withdraw "B")))
+	      (after (ref (d)) (withdraw "B")))
 
 	 (check-query "[]<> (a revealed => A has-deposit>= 100000000 satoshi)")
 
