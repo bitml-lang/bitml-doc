@@ -127,7 +127,7 @@ Otherwise, after a certain amount of time the block number 700000 will be append
 	(contract
 	 (pre 
 	  (deposit "A" 1 "txid:2e647d8566f00a08d276488db4f4e2d9f82dd82ef161c2078963d8deb2965e35@1")
-	  (secret "A" a "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"))
+	  (secret "A" a "f9292914bfd27c426a23465fc122322abbdb63b7"))
 		 
 	 (sum
 	  (reveal (a) (withdraw "A"))
@@ -175,7 +175,7 @@ with the strategy :bitml:`(strategy "B" (do-auth (auth "B"(after 700000 (withdra
 	(contract
 	  (pre 
 	   (deposit "A" 1 "txid:2e647d8566f00a08d276488db4f4e2d9f82dd82ef161c2078963d8deb2965e35@1")
-	   (secret "A" a "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"))
+	   (secret "A" a "f9292914bfd27c426a23465fc122322abbdb63b7"))
 		 
 	  (sum
 	   (reveal (a) (withdraw "A"))
@@ -229,8 +229,8 @@ Each of them will get their own BTC back if they reveal their secret.
 	  (pre 
 	   (deposit "A" 1 "txid:2e647d8566f00a08d276488db4f4e2d9f82dd82ef161c2078963d8deb2965e35@1")
 	   (deposit "B" 1 "txid:0f795bda36ac661f2b9a626d46049bc14b95b2d0e69f5fb7ccc4c3d767db9f34@1")
-	   (secret "A" a "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb")
-	   (secret "B" b "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d"))
+	   (secret "A" a "f9292914bfd27c426a23465fc122322abbdb63b7")
+	   (secret "B" b "9804ebb0fc4a8329981dd33aaff32b6cb579580a"))
 		 
 	  (split
 	   (1 -> (reveal (a) (withdraw "A")))
@@ -273,7 +273,7 @@ if :bitml:`"A"` does notreveal the secret within :balzac:`d`,
 	(define d 700000)
 
 	(contract
-	 (pre (deposit "A" 1 "txA@0")(secret "A" a "000a"))
+	 (pre (deposit "A" 1 "txA@0")(secret "A" a "f9292914bfd27c426a23465fc122322abbdb63b7"))
 	 
 	 (sum (reveal (a) (withdraw "A"))
 	      (after (ref d) (withdraw "B")))

@@ -281,10 +281,10 @@ Secrets must be declared in the contract precondition, as follows:
 
 .. code-block:: bitml
 
-	(pre (secret "A" a "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb")
+	(pre (secret "A" a "f9292914bfd27c426a23465fc122322abbdb63b7")
 
 where :bitml:`"A"` is the participant who owns the secret, :bitml:`a` is its *name*,
-and :bitml:`"ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"` is its hash.
+and :bitml:`"f9292914bfd27c426a23465fc122322abbdb63b7"` is its :balzac:`hash160` hash.
 We never denote the value of the secret
 itself. A basic contract which exploits this feature is the following:
 
