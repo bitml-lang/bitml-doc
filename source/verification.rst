@@ -48,7 +48,7 @@ we add :bitml:`(check-liquid)` at its end.
 	   (deposit "A" 1 "txid:2e647d8566f00a08d276488db4f4e2d9f82dd82ef161c2078963d8deb2965e35@1")
 	   (deposit "A" 1 "txid:625bc69c467b33e2ad70ea2817874067604eb42dd5835403f54fb6028bc70168@0"))
 	 
-	 (sum
+	 (choice
 	  (auth "A" "B" (withdraw "C"))
 	  (auth "A" "B" (withdraw "D")))
 
@@ -89,7 +89,7 @@ After the corresponding time passes, it unlocks and returns their deposits to :b
         (deposit "A" 1 "txid:2e647d8566f00a08d276488db4f4e2d9f82dd82ef161c2078963d8deb2965e35@1")
         (deposit "A" 1 "txid:625bc69c467b33e2ad70ea2817874067604eb42dd5835403f54fb6028bc70168@0"))
 	 
-      (sum
+      (choice
         (auth "A" "B" (withdraw "C"))
         (auth "A" "B" (withdraw "D"))
         (after 700000 (split (1 -> (withdraw "A")) (1 -> (withdraw "B")))))
@@ -129,7 +129,7 @@ Otherwise, after a certain amount of time the block number 700000 will be append
 	  (deposit "A" 1 "txid:2e647d8566f00a08d276488db4f4e2d9f82dd82ef161c2078963d8deb2965e35@1")
 	  (secret "A" a "f9292914bfd27c426a23465fc122322abbdb63b7"))
 		 
-	 (sum
+	 (choice
 	  (reveal (a) (withdraw "A"))
 	  (auth "B" (after 700000 (withdraw "B"))))
 
@@ -177,7 +177,7 @@ with the strategy :bitml:`(strategy "B" (do-auth (auth "B"(after 700000 (withdra
 	   (deposit "A" 1 "txid:2e647d8566f00a08d276488db4f4e2d9f82dd82ef161c2078963d8deb2965e35@1")
 	   (secret "A" a "f9292914bfd27c426a23465fc122322abbdb63b7"))
 		 
-	  (sum
+	  (choice
 	   (reveal (a) (withdraw "A"))
 	   (auth "B" (after 700000  (withdraw "B"))))
 
@@ -275,7 +275,7 @@ if :bitml:`"A"` does notreveal the secret within :balzac:`d`,
 	(contract
 	 (pre (deposit "A" 1 "txA@0")(secret "A" a "f9292914bfd27c426a23465fc122322abbdb63b7"))
 	 
-	 (sum (reveal (a) (withdraw "A"))
+	 (choice (reveal (a) (withdraw "A"))
 	      (after (ref (d)) (withdraw "B")))
 
 	 (check-query "[]<> (a revealed => A has-deposit>= 100000000 satoshi)")

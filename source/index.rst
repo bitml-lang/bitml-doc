@@ -23,18 +23,13 @@ Contents
     :maxdepth: 1
     :caption: Getting Started
 
+    installation
+
     nutshell
 
     compiler
 
-    verification
-	      
-.. toctree::
-    :hidden:
-    :maxdepth: 3
-    :caption: Installation and Configuration
-
-    installation
+    verification	      
 
 
 .. toctree::

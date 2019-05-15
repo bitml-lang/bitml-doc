@@ -115,7 +115,7 @@ The following contract allows :bitml:`"A"` to recover her deposit if
 	(contract
 	 (pre (deposit "A" 1 (ref (txA))))
 
-	 (sum
+	 (choice
 	 	(after (ref (t)) (withdraw "B"))
 	 	(after (ref (t1)) (withdraw "A"))))
 
@@ -153,7 +153,7 @@ with the item. A naïve attempt to model this contract is the following:
 .. code-block:: bitml
 
 	(define (Naive-escrow) 
-	  (sum
+	  (choice
 	    (auth "A" (withdraw "B"))
 	    (auth "B" (withdraw "A"))))
 
@@ -166,8 +166,9 @@ escrow contract, by introducing a trusted arbiter :bitml:`"O"` which resolves th
 .. code-block:: bitml
 
 	(define (Oracle-escrow) 
-	  (sum
-	    (ref (Naive-escrow))
+	  (choice
+	    (auth "A" (withdraw "B")) ; same as
+	    (auth "B" (withdraw "A")) ; Naive-escrow
 	    (auth "O" (withdraw "A"))
 	    (auth "O" (withdraw "B"))))
 
@@ -197,7 +198,7 @@ We can model this behaviour as follows:
 
 
 The split construct splits the contract in two or more parallel subcontracts,
-each with its own balance. Of course, the sum of their balances must be less
+each with its own balance. Of course, the choice of their balances must be less
 than or equal to the deposit of the whole contract.
 
 
@@ -213,7 +214,7 @@ We can model this behaviour as follows:
 
 	(contract
 	 (pre (deposit "A" 1 (ref (txA))))
-	 (sum
+	 (choice
 	   (auth "I" (split (0.1 -> (withdraw "I")) 
 	                    (0.5 -> (withdraw "B"))))
 	    (after (ref (d)) (withdraw "A"))))
@@ -264,7 +265,7 @@ persistent deposit, while :bitml:`"A2"` makes available a volatile deposit :bitm
 	(contract
 	 (pre (deposit "A1" 2 (ref (txA1)))
 	      (vol-deposit "A2" x 1 (ref (txA2))))
-	 (sum
+	 (choice
 	   (put (x) (split (2 -> (withdraw "B")) 
 	                   (1 -> (withdraw "A1"))))
 	    (after 700000 (withdraw "B"))))
