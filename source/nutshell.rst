@@ -1,3 +1,5 @@
+.. _BitML in a nuthsell:
+
 =========================
 |langname| in a nutshell
 =========================

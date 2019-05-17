@@ -21,7 +21,7 @@ Contents
 
 .. toctree::
     :maxdepth: 1
-    :caption: Getting Started
+    :caption: BitML Tutorial
 
     installation
 
@@ -34,9 +34,9 @@ Contents
 
 .. toctree::
     :maxdepth: 1
-    :caption: Smart contracts
+    :caption: Selected smart contracts
       
-    timed-commitment
+    2p-lottery
 
 
 ..        # with overline, for parts

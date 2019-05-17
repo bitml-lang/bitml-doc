@@ -1,3 +1,7 @@
+***************************
+Getting started
+***************************
+
 """"""""""""""""""""""""""""
 Installation
 """"""""""""""""""""""""""""
@@ -23,3 +27,12 @@ Virtual machine image
 
 `Here <https://unicadrsi-my.sharepoint.com/:u:/g/personal/s_lande_studenti_unica_it/EaJuFX1bxphLkuvlmxkgXAIBkO6k65EBMc3L7uMA6RWcuQ?e=fveHx4>`_ 
 you can find a VirtualBox virtual machine image with the |langname| toolchain pre-installed.  
+
+""""""""""""""""""""""""""""
+Next steps
+""""""""""""""""""""""""""""
+
+To write a BitML contract, open the DrRacket IDE and put at the beginning of your file :code:`lang #bitml`.
+
+To learn mode about BitML, take a look at the directory :code:`examples` in the repository,
+or read :ref:`BitML in a nuthsell`.
