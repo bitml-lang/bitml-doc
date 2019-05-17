@@ -34,7 +34,7 @@ Contents
 
 .. toctree::
     :maxdepth: 1
-    :caption: Selected smart contracts
+    :caption: Smart contracts
       
     2p-lottery
 
