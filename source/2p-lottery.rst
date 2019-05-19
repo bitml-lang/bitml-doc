@@ -2,7 +2,7 @@
 Two players lottery (with collaterals)
 """"""""""""""""""""""""""""
 
-We specify in BitML the 2-players lottery described in Andrychowicz et al.' paper [Secure Multiparty Computations on Bitcoin](https://ieeexplore.ieee.org/document/6956580/). The lottery involves 2 players, Alice and Bob, who bet 0.001 BTC each. The winner, chosen uniformly at random, gets 0.002 BTC. To determine the winner, each player secretly flips a coin: 
+We specify in BitML the 2-players lottery described in Andrychowicz et al.' paper `Secure Multiparty Computations on Bitcoin <https://ieeexplore.ieee.org/document/6956580/>`_. The lottery involves 2 players, Alice and Bob, who bet 0.001 BTC each. The winner, chosen uniformly at random, gets 0.002 BTC. To determine the winner, each player secretly flips a coin: 
 if the two sides are equal, the winner is the first player, otherwise it is the second player. To ensure fairness, the players put a deposit of 0.003 BTC each: 0.001 BTC for the bet, and 0.002 BTC as a collateral.
 
 The contract splits its balance in three sub-contracts.
