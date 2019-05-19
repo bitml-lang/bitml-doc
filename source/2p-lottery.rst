@@ -1,22 +1,15 @@
 """"""""""""""""""""""""""""
-Two players lottery
+Two players lottery (with collaterals)
 """"""""""""""""""""""""""""
 
-This contract models a lottery, where Alice and Bob bet 0.001 BTC each, and the winner, 
-chosen uniformly at random, gets 0.002 bitcoins. 
-To determine the winner, each player secretly flips a coin: 
-if the two sides are equal, the winner is the first player, otherwise it is the second player.
-The participants are required to put a deposit of 0.003 BTC each: 0.001 BTC for the bet,
-and 0.002 BTC as a security deposit.
+We specify in BitML the 2-players lottery described in Andrychowicz et al.' paper [Secure Multiparty Computations on Bitcoin](https://ieeexplore.ieee.org/document/6956580/). The lottery involves 2 players, Alice and Bob, who bet 0.001 BTC each. The winner, chosen uniformly at random, gets 0.002 BTC. To determine the winner, each player secretly flips a coin: 
+if the two sides are equal, the winner is the first player, otherwise it is the second player. To ensure fairness, the players put a deposit of 0.003 BTC each: 0.001 BTC for the bet, and 0.002 BTC as a collateral.
 
-The contract split its balance in three sub-contracts.
-In the first one, if Bob does not reveal before block 1500000 is added to the blockchain, 
-then Alice can get 0.002 bitcoins. 
+The contract splits its balance in three sub-contracts.
+In the first one, if Bob does not reveal before block 1500000 is added to the blockchain, then Alice can get 0.002 bitcoins. 
 The second subcontract is similar, inverting the roles. 
 To achieve fairness, we require secrets to be 0 or 1. 
 The third subcontract pays 0.002 bitcoins to the winner.
-
-
 
 
 .. code-block:: bitml
@@ -25,7 +18,6 @@ The third subcontract pays 0.002 bitcoins to the winner.
 
 	(debug-mode)
 
-	(auto-generate-secrets)
 	(define (txA) "tx:0200000000010141e7f4e9af6c149629ceed2468e362eb147b6f169cb0a9c2997fbe0a227efb890000000017160014e4f5f50ae873bd1c23e82fdc3808ec3b485b132dfeffffff02e0930400000000001976a914ded135b86a7ff97aece531c8b97dc8a3cb3ddc7488ac5f4412000000000017a914662af7dba12353d03d049ad01547b5c2abf33301870247304402207927d83ffed60ce2f7b5e94f939833eca7679b814b30b36c8ffb5586475f468002206e114af2510e0a7aff1325f6d34ed9573b30ef877cbaad8aa4d97d537ddf149e012102e6cd568374f4b7d4cd97794c186384c7ecdaa9b3e79aa4aa2b8d5397583828d443241700@0")
 	(define (txB) "tx:0200000000010113158418e1582ced019932d6b07d03ea2e0ebb3bee880ecaa663638fa4877258010000001716001418442f1d465df7e2d1257c0550d9bd2401f9557efeffffff02634412000000000017a91472d4d57afe9d8430f661f0240bf9d47ec545f8b787e0930400000000001976a914ce07ee1448bbb80b38ae0c03b6cdeff40ff326ba88ac024730440220105ba58827697fff2245736bb9ac6581026c8de2fa7a8c4c72c21459568fdf6402204e8b127df854d22402504f862078d1c261c9da2f916b5f2a1d8ccd232355b807012103dbe6085de318d9ec7793bd7770cad6bc5fa6a7bbea37b5739fb1a1a8bc512e9c43241700@1")
 	(define (txFee) "tx:02000000000101cf1b6c003e090a079c2b814cce0152d93052b6c900c555a5e0bd372e8c240bc72100000017160014045e674e5834b6034e2de314c22c3ab66470962dfeffffff0240420f00000000001976a914ce07ee1448bbb80b38ae0c03b6cdeff40ff326ba88ac78d513000000000017a914f5fed12c4365464ec88861634917f7d64478570c87024730440220770314f0713d39da943b17dc25d587f003f0c96bc795e8a75f1289d64a1a31c402204d082478efde292031388cb137105f4bdf292dd8da74976ec1b15f148cb9897801210344a74576f947f7a35d9585f8efc89c9699d855a5cfb7e208332bf866ea6a61d443241700@0")
@@ -187,7 +179,7 @@ Compiled transactions:
 	 eval Tinit, T1, T2, T3, T5, T6, T8, T9
 
 
-We executed the contract on the testnet. The hash of the transactions are the following:
+We have executed the compiled contract on the Bitcoin testnet. The hash of the transactions are the following:
 
 	
 ========================== ============ ====================================================================
