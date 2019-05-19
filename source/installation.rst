@@ -34,5 +34,5 @@ Next steps
 
 To write a BitML contract, open the DrRacket IDE and put at the beginning of your file :code:`lang #bitml`.
 
-To learn mode about BitML, take a look at the directory :code:`examples` in the repository,
+To learn more about the BitML toolchain, take a look at the :code:`examples` folder in the repository,
 or read :ref:`BitML in a nuthsell`.
