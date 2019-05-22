@@ -25,7 +25,7 @@ execute the installation script :code:`install.sh`, then log off and login again
 Virtual machine image
 ----------------------------
 
-`Here <https://unicadrsi-my.sharepoint.com/:u:/g/personal/s_lande_studenti_unica_it/EaJuFX1bxphLkuvlmxkgXAIBkO6k65EBMc3L7uMA6RWcuQ?e=fveHx4>`_ 
+`Here <https://drive.google.com/file/d/1hVE2s2cr83z1X4VZNg2pKHfAH5-Dq4wX/view?usp=sharing>`_ 
 you can find a VirtualBox virtual machine image with the |langname| toolchain pre-installed.  
 
 """"""""""""""""""""""""""""
