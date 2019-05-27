@@ -35,7 +35,8 @@ The preconditions of the contract require :bitml:`"A"` to provide two transactio
 
 *	:bitml:`(deposit "A" 0.01 (ref (txA))` of value 0.01 BTC, to be used as a deposit,
 *	:bitml:`(fee "A" 0.001 (ref (txFee)))` of value 0.001 BTC, to be used to provide a fee for each transaction.
-	If some of this deposit 
+	If the value of this deposit is greater than the fee required to execute the contract, 
+	the change will be redeemed by the participant who redeems the last transaction of the contract.
 
 The transaction output :bitml:`txA` is redeemable by :bitml:`"A"` through her private key. 
 The value :bitml:`"tx:02000000000102f28b8e...0512e2be394297475ed157a9cfc6bdb51600"` is the serialized transaction, 

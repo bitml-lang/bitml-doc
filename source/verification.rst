@@ -258,7 +258,7 @@ Custom LTL queries
 The following contract is a *timed commitment*, 
 where :bitml:`"A"` wants to choose a secret :balzac:`a`, 
 and reveal it before the deadline :balzac:`d`; 
-if :bitml:`"A"` does notreveal the secret within :balzac:`d`, 
+if :bitml:`"A"` does not reveal the secret within :balzac:`d`, 
 :bitml:`"B"` can redeem the 1 BTC deposit as a compensation.
 
 .. code-block:: bitml

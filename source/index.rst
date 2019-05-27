@@ -38,6 +38,8 @@ Contents
       
     2p-lottery
 
+    tc
+
 
 ..        # with overline, for parts
 ..        * with overline, for chapters
