@@ -9,6 +9,9 @@ The |langname| toolchain implements:
 * a **compiler** which translates |langname| contracts into *standard* Bitcoin transaction. The compiler is *computationally sound*, meaning that computational attacks (i.e., at the level of Bitcoin transactions) can be detected at the symbolic level of the BitML semantics;
 * a **model checker** which verifies security properties of BitML contracts, like their *liquidity* (i.e., funds never remain frozen in a contract [POST19]_), and custom LTL properties. The model checker is based on Maude [MAUDE]_.
 
+We made available a `preprint <https://arxiv.org/abs/1905.07639>`_ describing out toolchain, 
+and a short video `demonstration <https://www.youtube.com/watch?v=bxx3bM5Pm6c>`_.
+
 The |langname| toolchain is developed by the `Blockchain@Unica group <http://blockchain.unica.it/>`_
 of the `University of Cagliari <https://www.unica.it/unica/en/homepage.page>`_.
 The project is open source, and you are welcome to contribute to its
