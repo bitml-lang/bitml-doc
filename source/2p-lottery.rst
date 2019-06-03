@@ -45,9 +45,12 @@ The third subcontract pays 0.002 bitcoins to the winner.
 	          (auto-generate-secrets)
 	          (check-liquid))
 
+For the sake of simplicity, this contract is executed without separating Alice's view from Bob's.
+For an example of how the two participant independently execute the contract, 
+refer to the :ref:`Timed Commitment` example.
 
-Compiled transactions:
-
+This is the contract compiled in Balzac, completed with the signatures 
+and the secret required to execute the contract.
 
 .. code-block:: balzac
 

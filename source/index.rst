@@ -43,6 +43,8 @@ Contents
 
     tc
 
+    american-option
+
 
 ..        # with overline, for parts
 ..        * with overline, for chapters
