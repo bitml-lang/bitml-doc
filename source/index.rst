@@ -45,6 +45,12 @@ Contents
 
     american-option
 
+.. toctree::
+    :maxdepth: 1
+    :caption: Blockchain school 2019
+      
+    blockchain-school
+
 
 ..        # with overline, for parts
 ..        * with overline, for chapters
