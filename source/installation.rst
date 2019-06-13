@@ -32,7 +32,7 @@ you can find a VirtualBox virtual machine image with the |langname| toolchain pr
 Next steps
 """"""""""""""""""""""""""""
 
-To write a BitML contract, open the DrRacket IDE and put at the beginning of your file :code:`lang #bitml`.
+To write a BitML contract, open the DrRacket IDE and put at the beginning of your file :code:`#lang bitml`.
 
 For an overview of the capabilities of the toolchain, watch or video `demonstration <https://www.youtube.com/watch?v=bxx3bM5Pm6c>`_.
 To learn more about the BitML toolchain, take a look at the :code:`examples` folder in the repository,

@@ -76,15 +76,19 @@ the contract is liquid.
 Check that the curator gets 0.1 BTC if two members of the jury agree.
 
 ++++++++++++++++++++++++++++++++++++++++++++++
-Exercise 2 - working with Balzac transactions
+Exercise 3 - working with Balzac transactions
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-For this exercise, you have to write `Balzac <https://editor.balzac-lang.xyz/>`_ transactions,
+For this exercise, you have to write the `Balzac <https://editor.balzac-lang.xyz/>`_ transactions
+of the following contract,
 which is a modification of the first one.
 
-Write a transaction which locks the seized bitcoin. The transaction can be redeemed supplying two out of three
+Write a transaction which locks the seized bitcoin. 
+The transaction can be redeemed supplying two out of three
 signatures of the jurors AND the signature of the curator, but only after ``2019-06-14``.
 The transaction can also be redeemed by the curator alone, so she has until Friday to oppose the decision of the jury.
+The identity of the defendant is not known in advance,
+so his public key must be a parameter of the transaction that returns the seized bitcoin to him.
 
 ++++++++++++++++++++++++++++++++++++++
 Exercise 4 - the final boss
