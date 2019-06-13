@@ -302,12 +302,17 @@ itself. A basic contract which exploits this feature is the following:
 .. code-block:: bitml
 
 	(define (PaySecret)
-	  (reveal (a) (pred (> a 1)) (withdraw "A")))
+	  (revealif (a) (pred (> a 1)) (withdraw "A")))
 
 This contract asks :bitml:`"A"` to commit to a secret of length greater than one,
 as stated in the predicate :bitml:`(pred (> a 1))`.
 After revealing :bitml:`a`, it allows
 :bitml:`"A"` to redeem 1 BTC upon revealing the secret. Until then, the deposit is frozen.
+
+.. note::
+	
+	To reveal a secret without imposing a predicate use :bitml:`(reveal)`.
+	E.g.: :bitml:`(reveal (a) (withdraw "A"))` 
 
 Note that we never refer to the value itself of the secret, rather we use its length.
 After compiling to Bitcoin, the actual length of the secret will be increased by η,
