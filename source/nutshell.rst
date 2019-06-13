@@ -43,7 +43,7 @@ We can define this transaction output as follows:
 	(define (txA) "tx:02000000000102f28b8ec15a48abd9cda80d1c770ff9770dc0c549ddb1b8013b9e50a8799614aa000000001716001412a88716720982b693ab2bd2a2fcd4d98bdd2485feffffff08d59c3aeafd6003e6e099adde64f17d6ec7950619c22b50466281afa782e9d4000000001716001433845a8590dbf145b52bdd777103d1ddfdaa9cedfeffffff022fac1f000000000017a914e9f772646a0b6174c936806dab1b882e750ac04a8740420f00000000001976a914ded135b86a7ff97aece531c8b97dc8a3cb3ddc7488ac02473044022060135384eafe9a8021e8b8c46da20e7cd5713d581c3f79b1da3d2f7860a1bfed02206ca1ac1616d7ab778bcbb235b4b24286c2181ec171b8cadeaa9ee5f4f78fd330012102d5f8f263a81427330e7f26ba5832a2cd01e960bf145be2101bc0b6bb0fde8c2d0247304402200e02da2228774b47ff03a5a7c1bf1d070d0cec6cd9a08d6862e1855ba33dfb9f0220011511f10aaefbf402b2944b6a877c1ff9890a7fc3e266bbb74318b4540c555d012103ef2a573fbd46356dcbdbedcecc9aa25dcb500512e2be394297475ed157a9cfc6bdb51600@1")
 
 In the definition above, :bitml:`"02000000000102f28b...4297475ed157a9cfc6bdb51600"`
-are the bytes of the serialized transaction, and the trailing :bitml:`"@0"` is the index of the output.
+are the bytes of the serialized transaction, and the trailing :bitml:`"@1"` is the index of the output.
 
 The contract advertised by :bitml:`"A"` is the following:
 
@@ -95,7 +95,7 @@ We also reuse the transaction output :bitml:`txA` from the previous example:
 
 .. code-block:: bitml
 
-	(define (d) 500000)
+	(define (t) 500000)
 
 	(contract
 	 (pre (deposit "A" 1 (ref (txA))))
@@ -218,7 +218,7 @@ We can model this behaviour as follows:
 	 (pre (deposit "A" 1 (ref (txA))))
 	 (choice
 	   (auth "I" (split (0.1 -> (withdraw "I")) 
-	                    (0.5 -> (withdraw "B"))))
+	                    (0.9 -> (withdraw "B"))))
 	    (after (ref (d)) (withdraw "A"))))
 
 
