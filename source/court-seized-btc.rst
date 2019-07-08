@@ -193,7 +193,7 @@ Extra step - working with Balzac transactions
 
 In this last step, we implement a set of functionalities 
 which is not expressible in BitML.
-Hence, we have work with low-level `Balzac <https://editor.balzac-lang.xyz/>`_ transactions.
+Hence, we have to work with low-level `Balzac <https://editor.balzac-lang.xyz/>`_ transactions.
 
 Transaction ``TInit`` locks the seized bitcoin. 
 It can be redeemed supplying two out of three
