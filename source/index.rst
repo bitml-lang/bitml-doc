@@ -45,6 +45,8 @@ Contents
 
     american-option
 
+    court-seized-btc
+
 .. toctree::
     :maxdepth: 1
     :caption: Blockchain school 2019
