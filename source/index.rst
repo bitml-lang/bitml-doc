@@ -47,12 +47,6 @@ Contents
 
     court-seized-btc
 
-.. toctree::
-    :maxdepth: 1
-    :caption: Blockchain school 2019
-      
-    blockchain-school
-
 
 ..        # with overline, for parts
 ..        * with overline, for chapters
