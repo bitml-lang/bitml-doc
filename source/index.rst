@@ -45,6 +45,8 @@ Contents
 
     american-option
 
+    auction
+
     court-seized-btc
 
 
