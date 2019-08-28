@@ -49,6 +49,8 @@ Contents
 
     court-seized-btc
 
+    more-contracts
+
 
 ..        # with overline, for parts
 ..        * with overline, for chapters
