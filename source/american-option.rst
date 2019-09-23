@@ -2,25 +2,27 @@
 American Option
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-An option is a financial contract that allows a participant to exercise a choice
-between to subcontracts. 
-We implement in BitML the American flavour, where the participant can choose anytime 
-before a given deadline.
+An *option* is a financial contract that allows an investor to exercise a choice
+between two subcontracts. 
+We implement in BitML the *American option*,
+where the investor can exercise the choice anytime before a given deadline.
 
 We start by defining the parametric contract :bitml:`(ExecuteBefore t Contract)`.
-It takes two parameters: a deadline ``t``, expressed as block number,
-and the ``Contract`` which has to be executed before ``t``.
-After the deadline, the balance of the contract can be split between the participants.
+It takes two parameters: a deadline ``t``, expressed as a block number,
+and the ``Contract`` which has to be executed.
+After the deadline ``t``, the ``Contract`` can no longer be executed,
+and the balance can be split between the participants.
 
 Then, we define the parametric contract :bitml:`(AmericanOption Part t Contract1 Contract2)`.
 It takes the participant ``Part`` who can choose which branch to take,
-a deadline ``t``, and two subcontract, ``Contract1`` and ``Contract2``.
+a deadline ``t``, and two subcontracts, ``Contract1`` and ``Contract2``.
 ``Part`` can choose before ``t`` to proceed either with ``Contract1`` or ``Contract2``.
 
 Finally, in the :bitml:`(contract ...)` expression, 
 we instantiate the american option with
 :bitml:`(AmericanOption "A" 1550000 (withdraw "A") (withdraw "I"))`.
-We also check if the contract is liquid, assuming that Alice's
+
+We verify that the contract is liquid, assuming that Alice's
 strategy is to authorize either branch, 
 using :bitml:`check-liquid (strategy "A" (do-auth)))`.
 
@@ -57,10 +59,6 @@ using :bitml:`check-liquid (strategy "A" (do-auth)))`.
 	 
 	 (check-liquid
 	  (strategy "A" (do-auth))))
-
-For the sake of simplicity, this contract is executed without separating Alice's view from Bob's.
-For an example of how the two participant independently execute the contract, 
-refer to the :ref:`Timed Commitment` example.
 
 This is the contract compiled in Balzac, completed with the signatures required to execute the contract.
 
