@@ -28,8 +28,9 @@ class BitmlLexer(RegexLexer):
     # syntax file.
     keywords = (
         'pre','sum','->','putrevealif','put','revealif','reveal','split','withdraw','after','auth','tau',
-        'btrue','band','bor','bnot','b=','b!=','b<','b<=','b+','b-','bsize','pred','between','strategy',
-        'b-if','do-reveal','do-auth','not-destory','do-destory','state','check-liquid','check','has-more-than','check-query'
+        'true','and','or','not','=','!=','<','<=','+','-','size','pred','between','strategy',
+        'if','do-reveal','do-auth','not-destory','do-destory','state','check-liquid','check','has-more-than','check-query',
+        'choice','participant','contract','debug-mode','has-at-least','deposit','vol-deposit','fee','secret','ref','debug-mode'
     )
     builtins = ('*')
 
