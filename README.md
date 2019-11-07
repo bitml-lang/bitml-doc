@@ -4,7 +4,7 @@
 
 The documentation is generated in Python (both 2 and 3 version are tested by Travis CI).
 
-Before start, install the needed packages *as it follows:*
+Before starting, execute the following commands:
 
 * 1 - Use [pip](https://pip.pypa.io/en/stable/installing/) to install the following Python packages:
 
@@ -17,20 +17,22 @@ $ pip install sphinx pygments sphinxcontrib-inlinesyntaxhighlight
  ```shell
 $ make install-lexer
  ```
+ 
+# Building
 
- * 3 - Now you can build your own documentation, with the command:
+ * 1 - Build your own documentation:
  
  ```shell
  $ make build-doc
  ```
 
- * 4 - Then serve on your browser with the command:
+ * 2 - Start a local web server:
 
  ```shell
 $ make server
  ```
 
- Browse to **localhost:8000** to check the documentation built in step 3.
+ Browse to **localhost:8000** to check your documentation.
 
 # Available commands
 
