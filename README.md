@@ -30,7 +30,7 @@ $ make install-lexer
 $ make server
  ```
 
- Navigate to **localhost:8000** and check the built documentation from the step 3.
+ Browse to **localhost:8000** to check the documentation built in step 3.
 
 # Available commands
 
