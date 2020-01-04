@@ -1,0 +1,164 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, N. Atzei, M. Bartoletti, S. Lande, R. Zunino
+# This file is distributed under the same license as the BitML package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BitML 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-04 16:05-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../blockchain-school.rst:3
+msgid "Case study"
+msgstr ""
+
+#: ../../blockchain-school.rst:5
+msgid ""
+"Your case study is a custody smart contract that handles some funds "
+"seized from someone suspected of illegal activities. A jury decides if "
+"the defendant is innocent; if so, the seized bitcoins must return to the "
+"defendant. There is no need for the entire jury to judge the defendant "
+"innocent, the majority of members is sufficient."
+msgstr ""
+
+#: ../../blockchain-school.rst:13
+msgid "Exercise 1 - basic BitML contract"
+msgstr ""
+
+#: ../../blockchain-school.rst:15 ../../blockchain-school.rst:59
+#: ../../blockchain-school.rst:97
+msgid "Actors:"
+msgstr ""
+
+#: ../../blockchain-school.rst:17
+msgid "``A``, ``B``, ``C``: members of the jury"
+msgstr ""
+
+#: ../../blockchain-school.rst:18 ../../blockchain-school.rst:62
+#: ../../blockchain-school.rst:101
+msgid "``S``: defendant"
+msgstr ""
+
+#: ../../blockchain-school.rst:20
+msgid "Write a contract that implements the flow described above."
+msgstr ""
+
+#: ../../blockchain-school.rst:22
+msgid ""
+"Verify that if two jurors agree to return the bitcoins to ``S``, the "
+"contract is liquid."
+msgstr ""
+
+#: ../../blockchain-school.rst:27
+msgid ""
+"If you only care if a participant authorizes something, and not what "
+"particular contract she authorize, you can omit the contract from the "
+"strategy. Example: in :bitml:`(strategy \"A\" (do-auth (withdraw "
+"\"S\")))`, you can omit :bitml:`(withdraw \"S\")`."
+msgstr ""
+
+#: ../../blockchain-school.rst:31
+msgid "The skeleton of your contracts is the following:"
+msgstr ""
+
+#: ../../blockchain-school.rst:56
+msgid "Exercise 2 - extend BitML contract"
+msgstr ""
+
+#: ../../blockchain-school.rst:61
+msgid "``A``, ``B``, ``C``: jurors"
+msgstr ""
+
+#: ../../blockchain-school.rst:63 ../../blockchain-school.rst:103
+msgid "``T``: tribunal"
+msgstr ""
+
+#: ../../blockchain-school.rst:64 ../../blockchain-school.rst:102
+msgid "``Cur``: curator"
+msgstr ""
+
+#: ../../blockchain-school.rst:67
+msgid ""
+"Extend the contract as follows. After two jurors agree that the defendant"
+" is innocent, the balance is split in two parts:"
+msgstr ""
+
+#: ../../blockchain-school.rst:70
+msgid ""
+"0.9 BTC, which can return to the defendant after block 160000000. At any "
+"time before the deadline, the curator can oppose the jury decision and "
+"send the bitcoins to the tribunal"
+msgstr ""
+
+#: ../../blockchain-school.rst:71
+msgid "0.1 BTC, which goes to the curator as a service fee."
+msgstr ""
+
+#: ../../blockchain-school.rst:73
+msgid ""
+"Verify that if two members of the jury and the curator agree to return "
+"the bitcoins to ``S``, the contract is liquid."
+msgstr ""
+
+#: ../../blockchain-school.rst:76
+msgid "Check that the curator gets 0.1 BTC if two members of the jury agree."
+msgstr ""
+
+#: ../../blockchain-school.rst:80
+msgid "Exercise 3 - working with Balzac transactions"
+msgstr ""
+
+#: ../../blockchain-school.rst:82
+msgid ""
+"For this exercise, you have to write the `Balzac <https://editor.balzac-"
+"lang.xyz/>`_ transactions of the following contract, which is a "
+"modification of the first one."
+msgstr ""
+
+#: ../../blockchain-school.rst:86
+msgid ""
+"Write a transaction which locks the seized bitcoin. The transaction can "
+"be redeemed supplying two out of three signatures of the jurors AND the "
+"signature of the curator, but only after ``2019-06-14``. The transaction "
+"can also be redeemed by the curator alone, so she has until Friday to "
+"oppose the decision of the jury. The identity of the defendant is not "
+"known in advance, so his public key must be a parameter of the "
+"transaction that returns the seized bitcoin to him."
+msgstr ""
+
+#: ../../blockchain-school.rst:95
+msgid "Exercise 4 - the final boss"
+msgstr ""
+
+#: ../../blockchain-school.rst:99
+msgid "``A1``, ``B1``, ``C1``: jurors of the first jury"
+msgstr ""
+
+#: ../../blockchain-school.rst:100
+msgid "``A2``, ``B2``, ``C2``: jurors of the second jury"
+msgstr ""
+
+#: ../../blockchain-school.rst:105
+msgid ""
+"The contract is similar to the second one, but if the curator opposes the"
+" decision of the jury, there is another round of judgment. The second "
+"round is performed by a second jury. If the curator opposes the decision "
+"of the second jury, the seized bitcoin goes to the tribunal."
+msgstr ""
+
+#: ../../blockchain-school.rst:111
+msgid ""
+"To avoid to repeat the same piece of code multiple times, you can define "
+"a constant with :bitml:`(define (ContractName) contract)` and use it "
+"anywhere with :bitml:`(ref (ContractName))`."
+msgstr ""
+

@@ -1,0 +1,29 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, N. Atzei, M. Bartoletti, S. Lande, R. Zunino
+# This file is distributed under the same license as the BitML package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BitML 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-04 16:05-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../more-contracts.rst:3
+msgid "More contracts"
+msgstr ""
+
+#: ../../more-contracts.rst:5
+msgid ""
+"You can check out more (mostly uncommented) examples on the `repository "
+"<https://github.com/bitml-lang/bitml-compiler/tree/master/examples>`_."
+msgstr ""
+

@@ -1,0 +1,323 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, N. Atzei, M. Bartoletti, S. Lande, R. Zunino
+# This file is distributed under the same license as the BitML package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BitML 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-04 16:05-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../nutshell.rst:5
+msgid "|langname| in a nutshell"
+msgstr ""
+
+#: ../../nutshell.rst:7
+msgid ""
+"BitML contracts allow two or more participants to exchange their bitcoins"
+" according to complex pre-agreed rules. Below we illustrate the "
+"primitives of BitML through a series of simple examples (see [CCS18]_ for"
+" a reference to BitML syntax and semantics)."
+msgstr ""
+
+#: ../../nutshell.rst:13
+msgid ""
+"The first step in designing a BitML contract is to declare the involved "
+"participants. For instance, we can declare three participants "
+":bitml:`\"A\"`, :bitml:`\"B\"` and :bitml:`\"C\"` as follows:"
+msgstr ""
+
+#: ../../nutshell.rst:24
+msgid ""
+"Each participant is associated to a public key: for instance, "
+":bitml:`\"A\"` has the public key :bitml:`\"029c...cced\"`. The command "
+":bitml:`(debug-mode)` is needed to generate auxiliary keys which are used"
+" by the BitML compiler, instead of declaring them as you are supposed to "
+"when executing a contract in a real life scenario."
+msgstr ""
+
+#: ../../nutshell.rst:34
+msgid "Simple payments"
+msgstr ""
+
+#: ../../nutshell.rst:36
+msgid ""
+"Assume that :bitml:`\"A\"` simply wants to donate 1 BTC to "
+":bitml:`\"B\"`. To this purpose, :bitml:`\"A\"` must first declare that "
+"she owns a transaction output with 1 BTC. We can define this transaction "
+"output as follows:"
+msgstr ""
+
+#: ../../nutshell.rst:45
+msgid ""
+"In the definition above, "
+":bitml:`\"02000000000102f28b...4297475ed157a9cfc6bdb51600\"` are the "
+"bytes of the serialized transaction, and the trailing :bitml:`\"@1\"` is "
+"the index of the output."
+msgstr ""
+
+#: ../../nutshell.rst:48
+msgid "The contract advertised by :bitml:`\"A\"` is the following:"
+msgstr ""
+
+#: ../../nutshell.rst:56
+msgid ""
+"The contract precondition :bitml:`(pre (deposit \"A\" 1 (ref (txA))))` "
+"declares that :bitml:`\"A\"` agrees to transfer the 1 BTC referenced by "
+"the transaction output :bitml:`txA` under the control of the contract. "
+"The actual contract is :bitml:`(withdraw \"B\")`: this just transfers the"
+" funds deposited into the contract to :bitml:`\"B\"`."
+msgstr ""
+
+#: ../../nutshell.rst:64
+msgid ""
+"In the previous contract, the initial deposit has been provided by a "
+"transaction output; more in general, a contract can gather money from "
+"more than one transaction. For instance, assume that another participant "
+":bitml:`\"C\"` wants to contribute 1 BTC to the donation. The contract "
+"precondition is modified as follows:"
+msgstr ""
+
+#: ../../nutshell.rst:79
+msgid "Procrastinating payments"
+msgstr ""
+
+#: ../../nutshell.rst:81
+msgid ""
+"Assume now that :bitml:`\"A\"` wants to donate 1 BTC to :bitml:`\"B\"`, "
+"but only after a certain time :bitml:`t`. For instance, the 1 BTC could "
+"be a birthday present to be withdrawn only after the birthday date; or "
+"the amount of a rent to the landlord, to be paid only after the 1st of "
+"the month. We represent the time :bitml:`t` as a `block height "
+"<https://bitcoin.org/en/glossary/block-height>`_. For instance, we set "
+":bitml:`t` to 500000 (note that the block at this height was actually "
+"mined on `2017-12-18 <https://www.blockchain.com/btc/block-"
+"height/500000>`_)."
+msgstr ""
+
+#: ../../nutshell.rst:91
+msgid ""
+"To craft this contract we use the primitive :bitml:`after height "
+"contract`, which locks the :bitml:`contract` until the block at the given"
+" :bitml:`height` is appended to the blockchain. We also reuse the "
+"transaction output :bitml:`txA` from the previous example:"
+msgstr ""
+
+#: ../../nutshell.rst:104
+msgid ""
+"This contract ensures that only after the block at height :bitml:`t` has "
+"been appended to the blockchain, :bitml:`\"B\"` will be able to redeem 1 "
+"BTC from the contract, by performing the action :bitml:`(withdraw "
+"\"B\")`."
+msgstr ""
+
+#: ../../nutshell.rst:109
+msgid ""
+"The following contract allows :bitml:`\"A\"` to recover her deposit if "
+":bitml:`\"B\"` has not withdrawn within a given deadline :bitml:`t1` > "
+":bitml:`t`:"
+msgstr ""
+
+#: ../../nutshell.rst:124
+msgid ""
+"The contract allows two (mutually exclusive) behaviours: either "
+":bitml:`\"A\"` or :bitml:`\"B\"` can withdraw 1 BTC. Before the deadline "
+":bitml:`t` no one can withdraw; after :bitml:`t` (but before :bitml:`t1`)"
+" only :bitml:`\"B\"` can withdraw, while after the :bitml:`t1` both "
+"withdraw actions are enabled, so the first one who performs their "
+"withdraw will get the money."
+msgstr ""
+
+#: ../../nutshell.rst:134
+msgid "Authorizing payments"
+msgstr ""
+
+#: ../../nutshell.rst:135
+msgid ""
+"Assume that :bitml:`\"A\"` is willing to pay 1 BTC to :bitml:`\"A\"`, but"
+" only if an :bitml:`\"Oracle\"` gives his authorization. We can use the "
+"authorization primitive :bitml:`auth Participant Contract` as follows:"
+msgstr ""
+
+#: ../../nutshell.rst:145
+msgid ""
+"This contract ensures that :bitml:`(withdraw \"B\")` is performed "
+"whenever :bitml:`\"Oracle\"` authorizes it."
+msgstr ""
+
+#: ../../nutshell.rst:148
+msgid ""
+"We can play with authorizations and summations to construct more complex "
+"contracts. For instance, assume we want to design an *escrow* contract, "
+"which allows :bitml:`\"A\"` to buy an item from :bitml:`\"B\"`, "
+"authorizing the payment only after she gets the item. Further, "
+":bitml:`\"B\"` can authorize a full refund to :bitml:`\"A\"`, in case "
+"there is some problem with the item. A naïve attempt to model this "
+"contract is the following:"
+msgstr ""
+
+#: ../../nutshell.rst:162
+msgid ""
+"If both participants are honest, everything goes smoothly: when "
+":bitml:`\"A\"` receives the item, she authorizes the payment to "
+":bitml:`\"B\"`, otherwise :bitml:`\"B\"` authorizes the refund. The "
+"problem with this contract is that, if neither :bitml:`\"A\"` nor "
+":bitml:`\"B\"` give the authorization, the money in the contract is "
+"frozen. To cope with this issue, we can refine the escrow contract, by "
+"introducing a trusted arbiter :bitml:`\"O\"` which resolves the dispute:"
+msgstr ""
+
+#: ../../nutshell.rst:181
+msgid ""
+"The last two branches are used if neither :bitml:`\"A\"` nor "
+":bitml:`\"B\"` give their authorizations: in this case, the arbiter "
+"chooses whether to authorize :bitml:`\"A\"` or :bitml:`\"B\"` to redeem "
+"the deposit."
+msgstr ""
+
+#: ../../nutshell.rst:186
+msgid "Splitting deposits"
+msgstr ""
+
+#: ../../nutshell.rst:188
+msgid ""
+"In all the previous examples, the deposit within the contract is "
+"transferred to a single participant. More in general, deposits can be "
+"split in many parts, to be transferred to different participants. For "
+"instance, assume that :bitml:`\"A\"` wants her 1 BTC deposit to be "
+"transferred in equal parts to :bitml:`\"B1\"` and to :bitml:`\"B2\"`. We "
+"can model this behaviour as follows:"
+msgstr ""
+
+#: ../../nutshell.rst:202
+msgid ""
+"The split construct splits the contract in two or more parallel "
+"subcontracts, each with its own balance. Of course, the choice of their "
+"balances must be less than or equal to the deposit of the whole contract."
+msgstr ""
+
+#: ../../nutshell.rst:207
+msgid ""
+"We can use split together with the other primitives presented so far to "
+"craft more complex contracts. For instance, assume that :bitml:`\"A\"` "
+"wants pay 0.9 BTC to :bitml:`\"B\"`, routing the payment through an "
+"intermediary :bitml:`\"I\"` who can choose whether to authorize it (in "
+"this case retaining a 0.1 BTC fee), or not. Since :bitml:`\"A\"` does not"
+" trust :bitml:`\"I\"`, she wants to use a contract to guarantee that: (i)"
+" if :bitml:`\"I\"` authorizes the payment then 0.9 BTC are transferred to"
+" :bitml:`\"B\"`; (ii) otherwise, :bitml:`\"A\"` does not lose money. We "
+"can model this behaviour as follows:"
+msgstr ""
+
+#: ../../nutshell.rst:225
+msgid ""
+"The first branch can only be taken if :bitml:`\"I\"` authorizes the "
+"payment: in this case, :bitml:`\"I\"` gets his fee, and :bitml:`\"B\"` "
+"gets his payment. Instead, if :bitml:`\"I\"` denies his authorization, "
+"then :bitml:`\"A\"` can redeem her deposit after block height :bitml:`d`."
+msgstr ""
+
+#: ../../nutshell.rst:232
+msgid "Volatile deposits"
+msgstr ""
+
+#: ../../nutshell.rst:235
+msgid ""
+"So far, we have seen participants using persistent deposits, that are "
+"assimilated by the contract upon stipulation. Besides these, participants"
+" can also use volatile deposits, which are not assimilated upon "
+"stipulation. For instance:"
+msgstr ""
+
+#: ../../nutshell.rst:245
+msgid ""
+"gives :bitml:`\"A\"` the possibility of contributing 1 BTC during the "
+"contract execution. However, :bitml:`\"A\"` can choose instead to spend "
+"her volatile deposit outside the contract. The variable :bitml:`x` is a "
+"handle to the volatile deposit, which can be used as follows:"
+msgstr ""
+
+#: ../../nutshell.rst:254
+msgid ""
+"Since :bitml:`x` is not paid upfront, there is no guarantee that "
+":bitml:`x` will be available when the contract demands it, as "
+":bitml:`\"A\"` can spend it for other purposes."
+msgstr ""
+
+#: ../../nutshell.rst:257
+msgid ""
+"Volatile deposits can be exploited within more complex contracts, to "
+"handle situations where a participant wants to add some funds to the "
+"contract. For instance, assume a scenario where :bitml:`\"A1\"` and "
+":bitml:`\"A2\"` want to give :bitml:`\"B\"` 2 BTC as a present, paying 1 "
+"BTC each. However, :bitml:`\"A2\"` is not sure a priori she will be able "
+"to pay, because she may need her 1 BTC for more urgent purposes: in this "
+"case, :bitml:`\"A1\"` is willing to pay an extra bitcoin. We can model "
+"this scenario as follows: :bitml:`\"A1\"` puts 2 BTC as a persistent "
+"deposit, while :bitml:`\"A2\"` makes available a volatile deposit "
+":bitml:`x` of 1 BTC:"
+msgstr ""
+
+#: ../../nutshell.rst:276
+msgid ""
+"In the first branch, :bitml:`\"A2\"` puts 1 BTC in the contract, and the "
+"balance is split between :bitml:`\"B\"` (who takes 2 BTC, as expected), "
+"and :bitml:`\"A1\"` (who takes her extra deposit back). The second branch"
+" is enabled after :bitml:`d`, and it deals with the case where "
+":bitml:`\"A2\"` has not put her deposit by such deadline. In this case, "
+":bitml:`\"B\"` can redeem 2 BTC, while :bitml:`\"A2\"` loses the extra "
+"deposit. Note that, in both cases, :bitml:`\"B\"` will receive 2 BTC."
+msgstr ""
+
+#: ../../nutshell.rst:286
+msgid "Revealing secrets"
+msgstr ""
+
+#: ../../nutshell.rst:288
+msgid ""
+"A useful feature of Bitcoin smart contracts is the possibility for a "
+"participant to choose a secret, and unblock some action only when the "
+"secret is revealed. Further, different actions can be enabled according "
+"to the length of the secret. Secrets must be declared in the contract "
+"precondition, as follows:"
+msgstr ""
+
+#: ../../nutshell.rst:297
+msgid ""
+"where :bitml:`\"A\"` is the participant who owns the secret, :bitml:`a` "
+"is its *name*, and :bitml:`\"f9292914bfd27c426a23465fc122322abbdb63b7\"` "
+"is its :balzac:`hash160` hash. We never denote the value of the secret "
+"itself. A basic contract which exploits this feature is the following:"
+msgstr ""
+
+#: ../../nutshell.rst:307
+msgid ""
+"This contract asks :bitml:`\"A\"` to commit to a secret of length greater"
+" than one, as stated in the predicate :bitml:`(pred (> a 1))`. After "
+"revealing :bitml:`a`, it allows :bitml:`\"A\"` to redeem 1 BTC upon "
+"revealing the secret. Until then, the deposit is frozen."
+msgstr ""
+
+#: ../../nutshell.rst:314
+msgid ""
+"To reveal a secret without imposing a predicate use :bitml:`(reveal)`. "
+"E.g.: :bitml:`(reveal (a) (withdraw \"A\"))`"
+msgstr ""
+
+#: ../../nutshell.rst:317
+msgid ""
+"Note that we never refer to the value itself of the secret, rather we use"
+" its length. After compiling to Bitcoin, the actual length of the secret "
+"will be increased by η, where η is a security parameter, large enough to "
+"avoid brute-force preimage attack."
+msgstr ""
+

@@ -1,0 +1,151 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, N. Atzei, M. Bartoletti, S. Lande, R. Zunino
+# This file is distributed under the same license as the BitML package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BitML 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-04 16:05-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../compiler.rst:3
+msgid "Compiling |langname| contracts"
+msgstr ""
+
+#: ../../compiler.rst:5
+msgid ""
+"|langname| is implemented as Racket language. You can use it either "
+"through DrRacket or through the racket command-line interpreter. In this "
+"tutorial we will use DrRacket."
+msgstr ""
+
+#: ../../compiler.rst:11
+msgid "From BitML to Balzac transactions"
+msgstr ""
+
+#: ../../compiler.rst:13
+msgid "We start compiling the following contract:"
+msgstr ""
+
+#: ../../compiler.rst:33
+msgid ""
+"The contract is a simple transfer of currency: the BTC deposited in the "
+"contract are transferred to :bitml:`\"B\"`. The preconditions of the "
+"contract require :bitml:`\"A\"` to provide two transaction outputs:"
+msgstr ""
+
+#: ../../compiler.rst:36
+msgid ""
+":bitml:`(deposit \"A\" 0.01 (ref (txA))` of value 0.01 BTC, to be used as"
+" a deposit,"
+msgstr ""
+
+#: ../../compiler.rst:37
+msgid ""
+":bitml:`(fee \"A\" 0.001 (ref (txFee)))` of value 0.001 BTC, to be used "
+"to provide a fee for each transaction. If the value of this deposit is "
+"greater than the fee required to execute the contract, the change will be"
+" redeemed by the participant who redeems the last transaction of the "
+"contract."
+msgstr ""
+
+#: ../../compiler.rst:41
+msgid ""
+"The transaction output :bitml:`txA` is redeemable by :bitml:`\"A\"` "
+"through her private key. The value "
+":bitml:`\"tx:02000000000102f28b8e...0512e2be394297475ed157a9cfc6bdb51600\"`"
+" is the serialized transaction, which can be obtained through the Bitcoin"
+" command line or a `block explorer "
+"<https://chain.so/tx/BTCTEST/6aa0154ee6f0981e2e447d569db2a7d2a1534cf3c535031cd76564cf01fae57b/>`_."
+" The same holds for transaction output :bitml:`txFee`."
+msgstr ""
+
+#: ../../compiler.rst:47
+msgid ""
+"Paste the code into a DrRacket window, then hit the \"Run\" button in the"
+" upper right corner."
+msgstr ""
+
+#: ../../compiler.rst:50
+msgid ""
+"Don't forget to specify you are using |langname| by starting your file "
+"with :bitml:`#lang bitml`."
+msgstr ""
+
+#: ../../compiler.rst:57
+msgid ""
+"DrRacket will show the output of the compilation, which contains the "
+"transactions of the contract, expressed in `Balzac "
+"<https://blockchain.unica.it/balzac/docs/>`_."
+msgstr ""
+
+#: ../../compiler.rst:62
+msgid "From Balzac to Bitcoin"
+msgstr ""
+
+#: ../../compiler.rst:64
+msgid ""
+"Balzac is an high-level language for writing transactions, verifying "
+"their correctness, and compiling them into actual Bitcoin transactions. "
+"We exploit Balzac to compile the transaction of the contract, so we can "
+"send them to the Bitcoin network."
+msgstr ""
+
+#: ../../compiler.rst:67
+msgid "Here is the compiled output of the previous contract."
+msgstr ""
+
+#: ../../compiler.rst:97
+msgid ""
+"Start by pasting it in the `Balzac web editor <https://editor.balzac-"
+"lang.xyz/>`_."
+msgstr ""
+
+#: ../../compiler.rst:104
+msgid ""
+"To stipulate the contract :bitml:`\"A\"` have to sign the transaction "
+":balzac:`Tinit` and send it to the Bitcoin network. Balzac can compute "
+"the signature for her, but it needs her public key. So, she adds it:"
+msgstr ""
+
+#: ../../compiler.rst:111
+msgid ""
+"Now, she can compute and add the signature to the transaction "
+":balzac:`Tinit`, with the :balzac:`sig(_)` function."
+msgstr ""
+
+#: ../../compiler.rst:125
+msgid ""
+"Firstly, :bitml:`\"A\"` evaluates the transaction :balzac:`Tinit` adding "
+"to the bottom of the file:"
+msgstr ""
+
+#: ../../compiler.rst:131
+msgid "then pressing the button \"Evaluate\"."
+msgstr ""
+
+#: ../../compiler.rst:138
+msgid ""
+"The last string in the picture above is the serialized transaction that "
+"can be published in the Bitcoin network as described `here "
+"<https://blockchain.unica.it/balzac/docs/raw-transactions.html>`_. You "
+"can find the transaction on a Bitcoin Testnet `explorer "
+"<https://chain.so/tx/BTCTEST/155f58c8c8b4c98d6de1e61a96463b04b3c3aceb6459c9fec5c140d4f6e7eba6>`_."
+msgstr ""
+
+#: ../../compiler.rst:143
+msgid ""
+"In this tutorial we work on the Bitcoin testnet. If you want to use the "
+"mainnet (at your own risk), add :balzac:`network mainnet` to your Balzac "
+"file."
+msgstr ""
+

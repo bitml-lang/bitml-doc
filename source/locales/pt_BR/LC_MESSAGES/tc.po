@@ -1,0 +1,152 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, N. Atzei, M. Bartoletti, S. Lande, R. Zunino
+# This file is distributed under the same license as the BitML package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BitML 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-04 16:05-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../tc.rst:5
+msgid "Timed commitment"
+msgstr ""
+
+#: ../../tc.rst:7
+msgid ""
+"Assume that Alice wants to choose a secret ``s``, and reveal it after "
+"some time -- while guaranteeing that the revealed value corresponds to "
+"the chosen secret (or paying a penalty otherwise). This can be obtained "
+"through a timed commitment, a protocol with applications e.g. in gambling"
+" games, where the secret contains the player move, and the delay in the "
+"revelation of the secret is intended to prevent other players from "
+"altering the outcome of the game."
+msgstr ""
+
+#: ../../tc.rst:14
+msgid ""
+"In the timed commitment below, Alice commits a secret of hash "
+"``b472a266d0bd89c13706a4132ccfb16f7c3b9fcb``, and has until block 1550000"
+" to reveal it. After block 1550000 is appended to the blockchain, Bob can"
+" redeem Alice's deposit."
+msgstr ""
+
+#: ../../tc.rst:43
+msgid "Alice's view"
+msgstr ""
+
+#: ../../tc.rst:45
+msgid ""
+"Alice opens the `Balzac Online Editor <https://editor.balzac-"
+"lang.xyz/>`_, and pastes the output of the compiler. She starts computing"
+" her signatures, by first defining her public key ``privA``, then putting"
+" :balzac:`sig(privA)` where the compiler requires her signatures. She "
+"also puts the value of her secret ``00000000...001``."
+msgstr ""
+
+#: ../../tc.rst:51
+msgid ""
+"Then, she evaluates her signatures, using :balzac:`eval sig(privA) of "
+"Tinit@0, ...` at the bottom of the file, and sends them to Bob. Bob does "
+"the same, so Alice receives his signatures and puts them in the constant "
+"declarations ``sigBT1``, ``sigBT3``, ``sigBT3``."
+msgstr ""
+
+#: ../../tc.rst:56
+msgid ""
+"Now all the transactions are completed and Alice can evaluate them, and "
+"send to the Bitcoin network ``Tinit`` to start the contract, ``T1`` to "
+"reveal the secret, and ``T2`` to redeem her deposit."
+msgstr ""
+
+#: ../../tc.rst:60
+msgid ""
+"After ``T1`` added to the blockchain, is not possible to publish ``T3`` "
+"(the transaction that send Alice's deposit to Bob) anymore, because they "
+"spend the same output ``Tinit@0``. This is coherent with the "
+"specification of the contract, because if Alice reveals her secret, Bob "
+"shouldn't be able to take her deposit."
+msgstr ""
+
+#: ../../tc.rst:123
+msgid "Bob's view"
+msgstr ""
+
+#: ../../tc.rst:125
+msgid ""
+"The steps executed by Bob are the dual of the Alice's ones. Differently "
+"from Alice, he cannot publish ``T1`` right away, because he doesn't know "
+"the secret. He wait for Alice to reveal her secret, or until block "
+"155000, when the timelock on ``T3`` will unlock, and publish it to take "
+"Alice's deposit."
+msgstr ""
+
+#: ../../tc.rst:191
+msgid ""
+"We have executed the compiled contract on the Bitcoin testnet. The hash "
+"of the transactions are the following:"
+msgstr ""
+
+#: ../../tc.rst:195
+msgid "Phase"
+msgstr ""
+
+#: ../../tc.rst:195
+msgid "Tx name"
+msgstr ""
+
+#: ../../tc.rst:195
+msgid "Tx id"
+msgstr ""
+
+#: ../../tc.rst:197
+msgid "Init"
+msgstr ""
+
+#: ../../tc.rst:197
+msgid "Tinit"
+msgstr ""
+
+#: ../../tc.rst:197
+msgid ""
+"`139a7b529cb5b91ab54257abf22797b25700430f0cc49bf69324fc1d07827ad2 "
+"<https://chain.so/tx/BTCTEST/139a7b529cb5b91ab54257abf22797b25700430f0cc49bf69324fc1d07827ad2>`_"
+msgstr ""
+
+#: ../../tc.rst:198
+msgid "reveal a"
+msgstr ""
+
+#: ../../tc.rst:198
+msgid "T1"
+msgstr ""
+
+#: ../../tc.rst:198
+msgid ""
+"`46ceb75f2261c9879fac0192547dceb35123ee5188158fe7cbb1ca6200e7cefb "
+"<https://chain.so/tx/BTCTEST/46ceb75f2261c9879fac0192547dceb35123ee5188158fe7cbb1ca6200e7cefb>`_"
+msgstr ""
+
+#: ../../tc.rst:199
+msgid "withdraw \"A\""
+msgstr ""
+
+#: ../../tc.rst:199
+msgid "T2"
+msgstr ""
+
+#: ../../tc.rst:199
+msgid ""
+"`6e1fd285cab75985de9b52a6068e67bc074d80e81baac72bb741004333df1f8e "
+"<https://chain.so/tx/BTCTEST/6e1fd285cab75985de9b52a6068e67bc074d80e81baac72bb741004333df1f8e>`_"
+msgstr ""
+

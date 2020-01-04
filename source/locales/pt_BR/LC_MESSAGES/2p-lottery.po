@@ -1,0 +1,187 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, N. Atzei, M. Bartoletti, S. Lande, R. Zunino
+# This file is distributed under the same license as the BitML package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BitML 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-04 16:05-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../2p-lottery.rst:3
+msgid "Two players lottery (with collaterals)"
+msgstr "Loteria de Dois Jogadores(Two players lottery)(com garantias)"
+
+#: ../../2p-lottery.rst:5
+msgid ""
+"We specify in BitML the 2-players lottery described in Andrychowicz et al"
+" paper `Secure Multiparty Computations on Bitcoin "
+"<https://ieeexplore.ieee.org/document/6956580/>`_. The lottery involves 2"
+" players, Alice and Bob, who bet 0.001 BTC each. The winner, chosen "
+"uniformly at random, gets 0.002 BTC. To determine the winner, each player"
+" secretly flips a coin: if the two sides are equal, the winner is the "
+"first player, otherwise it is the second player. To ensure fairness, the "
+"players put a deposit of 0.003 BTC each: 0.001 BTC for the bet, and 0.002"
+" BTC as a collateral."
+msgstr ""
+"Especificamos a linguange BitML no conceito de loteria de dois jogadores(2-players lottery) descrito por Andrychowicz em seu"
+" paper `Secure Multiparty Computations on Bitcoin - Protegendo processamento de operações computacionais multigrupo no Bitcoin. "
+"<https://ieeexplore.ieee.org/document/6956580/>`_. A Loteria involve dois"
+" jogadores, aqui chamados , Alice e Bob, que fizeram uma aposta entre si no valor de 0.001 BTC(1 Satoshi) cada. O ganhador da aposta, escolhido "
+"aleatoriamente e de forma uniforme, ganha 0.002 BTC(Dois Satoshi). Para definir quem foi o ganhador, **CADA JOGADOR** "
+" secretamente, arremesa uma moeda para o alto: Se os dois arremessos forem iguais, resultando em duas caras ou duas coroas, o ganhador será o"
+"primeiro jogador , caso contrário, o ganhador será o segundo jogador. Para garantir que o jogo seja justo, ambos "
+"jogadores devem realizar um depósito de 0.003 BTC(3 Satoshi) cada um: 0.001 BTC(1 Satoshi) para a posta e , and 0.002"
+" BTC(2 Satoshi) como **garantia**."
+
+#: ../../2p-lottery.rst:8
+msgid ""
+"The contract splits its balance in three sub-contracts. In the first one,"
+" if Bob does not reveal before block 1500000 is added to the blockchain, "
+"then Alice can get 0.002 bitcoins. The second subcontract is similar, "
+"inverting the roles. To achieve fairness, we require secrets to be 0 or "
+"1. The third subcontract pays 0.002 bitcoins to the winner."
+msgstr ""
+"O contrato inicial(A aposta) divide seu saldo em **3 subcontratos**; No primeiro contrato,"
+" caso Bob não revele o resultado do arremesso da moeda antes da adição do bloco 1500000 entrar no blockchain, "
+"então Alice pode receber 0.002 bitcoins(2 Satoshi). O segundo subcontrato é similar,"
+"apenas invertendo os papéis. Para garantir que o jogo seja justo, exigimos que o sigilio do jogo seja igual a 0"
+"ou 1. O terceiro contrato é o que pagará o valor da aposta, 0.002 bitcoins(2 Satoshi) para o ganhador."
+
+#: ../../2p-lottery.rst:48
+msgid ""
+"For the sake of simplicity, this contract is executed without separating "
+"Alice's view from Bob's. For an example of how the two participant "
+"independently execute the contract, refer to the :ref:`Timed Commitment` "
+"example."
+msgstr ""
+
+#: ../../2p-lottery.rst:52
+msgid ""
+"This is the contract compiled in Balzac, completed with the signatures "
+"and the secret required to execute the contract."
+msgstr ""
+
+#: ../../2p-lottery.rst:191
+msgid ""
+"We have executed the compiled contract on the Bitcoin testnet. The hash "
+"of the transactions are the following:"
+msgstr ""
+
+#: ../../2p-lottery.rst:195
+msgid "Phase"
+msgstr ""
+
+#: ../../2p-lottery.rst:195
+msgid "Tx name"
+msgstr ""
+
+#: ../../2p-lottery.rst:195
+msgid "Tx id"
+msgstr ""
+
+#: ../../2p-lottery.rst:197 ../../2p-lottery.rst:198
+msgid "Init"
+msgstr ""
+
+#: ../../2p-lottery.rst:197
+msgid "Tinit"
+msgstr ""
+
+#: ../../2p-lottery.rst:197
+msgid ""
+"`e94be8d58c1839e5649ac5a5c50dd114b235bc99338c7766c15e2a1a858fc8e7 "
+"<https://chain.so/tx/BTCTEST/e94be8d58c1839e5649ac5a5c50dd114b235bc99338c7766c15e2a1a858fc8e7>`_"
+msgstr ""
+
+#: ../../2p-lottery.rst:198
+msgid "T1"
+msgstr ""
+
+#: ../../2p-lottery.rst:198
+msgid ""
+"`72c38df85cb8deb2a89d9af937662ccad7b1c851513ae719b4e6195ae85ec62d "
+"<https://chain.so/tx/BTCTEST/72c38df85cb8deb2a89d9af937662ccad7b1c851513ae719b4e6195ae85ec62d>`_"
+msgstr ""
+
+#: ../../2p-lottery.rst:199 ../../2p-lottery.rst:200
+msgid "b commitment"
+msgstr ""
+
+#: ../../2p-lottery.rst:199
+msgid "T2"
+msgstr ""
+
+#: ../../2p-lottery.rst:199
+msgid ""
+"`835b2e52bb1b0c903025c86c4469d3f62ab888118bf0f56c7bbc196ffac9e350 "
+"<https://chain.so/tx/BTCTEST/835b2e52bb1b0c903025c86c4469d3f62ab888118bf0f56c7bbc196ffac9e350>`_"
+msgstr ""
+
+#: ../../2p-lottery.rst:200
+msgid "T3"
+msgstr ""
+
+#: ../../2p-lottery.rst:200
+msgid ""
+"`8155fd05caed8599d35df7c3fde80a17242cff78653b1929a3f761d9a7507701 "
+"<https://chain.so/tx/BTCTEST/8155fd05caed8599d35df7c3fde80a17242cff78653b1929a3f761d9a7507701>`_"
+msgstr ""
+
+#: ../../2p-lottery.rst:201 ../../2p-lottery.rst:202
+msgid "a commitment"
+msgstr ""
+
+#: ../../2p-lottery.rst:201
+msgid "T5"
+msgstr ""
+
+#: ../../2p-lottery.rst:201
+msgid ""
+"`a8f02fe90ec579aa0530238dd049794e058c4b7e9c2e9948309a6b034ddda73e "
+"<https://chain.so/tx/BTCTEST/a8f02fe90ec579aa0530238dd049794e058c4b7e9c2e9948309a6b034ddda73e>`_"
+msgstr ""
+
+#: ../../2p-lottery.rst:202
+msgid "T6"
+msgstr ""
+
+#: ../../2p-lottery.rst:202
+msgid ""
+"`08f24c84628641fecf0f33f013dbdc24c507530282cfb3c5eff97c6c2d502e59 "
+"<https://chain.so/tx/BTCTEST/08f24c84628641fecf0f33f013dbdc24c507530282cfb3c5eff97c6c2d502e59>`_"
+msgstr ""
+
+#: ../../2p-lottery.rst:203 ../../2p-lottery.rst:204
+msgid "Lottery execution"
+msgstr ""
+
+#: ../../2p-lottery.rst:203
+msgid "T8"
+msgstr ""
+
+#: ../../2p-lottery.rst:203
+msgid ""
+"`ed35d4849c73680d16f9c3a3cd1ce135ab35428b39066db191167a1f501b5ec7 "
+"<https://chain.so/tx/BTCTEST/ed35d4849c73680d16f9c3a3cd1ce135ab35428b39066db191167a1f501b5ec7>`_"
+msgstr ""
+
+#: ../../2p-lottery.rst:204
+msgid "T9"
+msgstr ""
+
+#: ../../2p-lottery.rst:204
+msgid ""
+"`f7097c3523aecc62dc97c790f1b276db9fc662f7a4b13fd548093ff11a09d33d "
+"<https://chain.so/tx/BTCTEST/f7097c3523aecc62dc97c790f1b276db9fc662f7a4b13fd548093ff11a09d33d>`_"
+msgstr ""
+

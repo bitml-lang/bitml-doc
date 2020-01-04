@@ -1,0 +1,178 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, N. Atzei, M. Bartoletti, S. Lande, R. Zunino
+# This file is distributed under the same license as the BitML package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BitML 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-04 16:05-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../court-seized-btc.rst:3
+msgid "Court-seized bitcoins"
+msgstr ""
+
+#: ../../court-seized-btc.rst:5
+msgid ""
+"This series of smart contracts is designed to be used in the hypothetical"
+" case where an amount of bitcoins, seized from someone suspected of "
+"illegal activities, is meant to be managed on-chain."
+msgstr ""
+
+#: ../../court-seized-btc.rst:11
+msgid ""
+"Recently, an italian court `seized an amount of bitcoins "
+"<https://news.bitcoin.com/bitgrail-bitcoin-assets-taken-by-italian-"
+"government-victims-still-fuming/>`_, but, needless to say, the case was "
+"not handled with a smart contract."
+msgstr ""
+
+#: ../../court-seized-btc.rst:17
+msgid "Step 1 - Basic contract"
+msgstr ""
+
+#: ../../court-seized-btc.rst:19
+msgid ""
+"In the basic contract, a jury decides if the defendant is innocent. If "
+"they rule in favour of the defendant, the seized bitcoins must return to "
+"the him. There is no need for the entire jury to judge the defendant "
+"innocent, the majority of members is sufficient."
+msgstr ""
+
+#: ../../court-seized-btc.rst:24 ../../court-seized-btc.rst:70
+#: ../../court-seized-btc.rst:130
+msgid "Actors:"
+msgstr ""
+
+#: ../../court-seized-btc.rst:26
+msgid "``A``, ``B``, ``C``: members of the jury"
+msgstr ""
+
+#: ../../court-seized-btc.rst:27 ../../court-seized-btc.rst:73
+#: ../../court-seized-btc.rst:134
+msgid "``S``: defendant"
+msgstr ""
+
+#: ../../court-seized-btc.rst:29
+msgid "The contract implements the flow described above."
+msgstr ""
+
+#: ../../court-seized-btc.rst:31
+msgid ""
+"We also verify that if two jurors agree to return the bitcoins to ``S``, "
+"the contract is liquid."
+msgstr ""
+
+#: ../../court-seized-btc.rst:61
+msgid ""
+"If you only care if a participant authorizes something, and not what "
+"particular contract she authorize, you can omit the contract from the "
+"strategy. Example: in :bitml:`(strategy \"A\" (do-auth (withdraw "
+"\"S\")))`, you can omit :bitml:`(withdraw \"S\")`."
+msgstr ""
+
+#: ../../court-seized-btc.rst:67
+msgid "Step 2 - Extend contract"
+msgstr ""
+
+#: ../../court-seized-btc.rst:72
+msgid "``A``, ``B``, ``C``: jurors"
+msgstr ""
+
+#: ../../court-seized-btc.rst:74 ../../court-seized-btc.rst:136
+msgid "``T``: storage"
+msgstr ""
+
+#: ../../court-seized-btc.rst:75 ../../court-seized-btc.rst:135
+msgid "``Cur``: curator"
+msgstr ""
+
+#: ../../court-seized-btc.rst:78
+msgid ""
+"The contract is extended with one more step. After two jurors agree that "
+"the defendant is innocent, the balance is split in two parts:"
+msgstr ""
+
+#: ../../court-seized-btc.rst:81
+msgid ""
+"0.9 BTC, which can return to the defendant after block 160000000. At any "
+"time before the deadline, the curator can oppose the jury decision and "
+"send the bitcoins to the the trusted storage service"
+msgstr ""
+
+#: ../../court-seized-btc.rst:82
+msgid "0.1 BTC, which goes to the curator as a service fee."
+msgstr ""
+
+#: ../../court-seized-btc.rst:84
+msgid ""
+"We verify that: if two members of the jury and the curator agree to "
+"return the bitcoins to ``S``, the contract is liquid; the curator gets "
+"0.1 BTC if two members of the jury agree."
+msgstr ""
+
+#: ../../court-seized-btc.rst:128
+msgid "Step 3 - The final boss"
+msgstr ""
+
+#: ../../court-seized-btc.rst:132
+msgid "``A1``, ``B1``, ``C1``: jurors of the first jury"
+msgstr ""
+
+#: ../../court-seized-btc.rst:133
+msgid "``A2``, ``B2``, ``C2``: jurors of the second jury"
+msgstr ""
+
+#: ../../court-seized-btc.rst:138
+msgid ""
+"This contract is similar to the second one, but if the curator opposes "
+"the decision of the jury, there is another round of judgment. The second "
+"round is performed by a second jury. If the curator opposes the decision "
+"of the second jury, the seized bitcoin goes to the trusted storage "
+"service."
+msgstr ""
+
+#: ../../court-seized-btc.rst:192
+msgid "Extra step - working with Balzac transactions"
+msgstr ""
+
+#: ../../court-seized-btc.rst:194
+msgid ""
+"In this last step, we implement a set of functionalities which is not "
+"expressible in BitML. Hence, we have to work with low-level `Balzac "
+"<https://editor.balzac-lang.xyz/>`_ transactions."
+msgstr ""
+
+#: ../../court-seized-btc.rst:198
+msgid ""
+"Transaction ``TInit`` locks the seized bitcoin. It can be redeemed "
+"supplying two out of three signatures of the jurors AND the signature of "
+"the curator, but only after ``2019-06-14``. The transaction can also be "
+"redeemed by the curator alone, so she has until Friday to oppose the "
+"decision of the jury. The identity of the defendant is not known in "
+"advance, so his public key must be a parameter of the transaction that "
+"returns the seized bitcoin to him."
+msgstr ""
+
+#: ../../court-seized-btc.rst:205
+msgid ""
+"Transaction ``T1`` returns the seized bitcoin to the defendant. Note that"
+" we don't know yet his identity, so we supply his public key as a "
+"parameter."
+msgstr ""
+
+#: ../../court-seized-btc.rst:209
+msgid ""
+"Transaction ``T2`` can be used by the Curator to move the bitcoin "
+"directly to the trusted storage service."
+msgstr ""
+

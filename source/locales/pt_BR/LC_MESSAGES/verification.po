@@ -1,0 +1,243 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, N. Atzei, M. Bartoletti, S. Lande, R. Zunino
+# This file is distributed under the same license as the BitML package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BitML 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-04 16:05-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../verification.rst:3
+msgid "Verifying |langname| contracts"
+msgstr ""
+
+#: ../../verification.rst:5
+msgid ""
+"Other than compiling contracts to transactions, the |langname| toolchain "
+"allows to verify contracts before executing them."
+msgstr ""
+
+#: ../../verification.rst:8
+msgid ""
+"A desirable property of smart contracts is **liquidity**, which requires "
+"that the contract balance is always eventually transferred to some "
+"participant. In a non-liquid contract, funds can be frozen forever, "
+"unavailable to anyone, hence effectively destroyed. There are many "
+"possible flavours of liquidity, depending e.g. on which participants are "
+"assumed to be honest, and on which are their strategies."
+msgstr ""
+
+#: ../../verification.rst:14
+msgid ""
+"The toolchain can also verify arbitrary security proprieties, expressed "
+"as LTL queries."
+msgstr ""
+
+#: ../../verification.rst:20
+msgid "Liquidity"
+msgstr ""
+
+#: ../../verification.rst:22
+msgid ""
+"In the following contract, :bitml:`\"A\"` and :bitml:`\"B\"` contribute 1"
+" BTC each for a donation of 2 BTC to either :bitml:`\"C\"` or "
+":bitml:`\"D\"`. We want to check if the contract is liquid or not, "
+"without supplying any strategy, i.e. without knowing which branch "
+":bitml:`\"A\"` and :bitml:`\"B\"` will authorize."
+msgstr ""
+
+#: ../../verification.rst:27
+msgid ""
+"This flavour of liquidity is called **strategy-less**. Intuitively, it "
+"corresponds to check if the contract is liquid for any possible strategy "
+"of any participants, whether they are honest or not."
+msgstr ""
+
+#: ../../verification.rst:32
+msgid ""
+"To check the liquidity of the following contract, we add :bitml:`(check-"
+"liquid)` at its end."
+msgstr ""
+
+#: ../../verification.rst:57
+msgid ""
+"During the compilation of the contract, the tool-chain checks if it is "
+"liquid. The result is printed before the transactions in a comment-box."
+msgstr ""
+
+#: ../../verification.rst:72
+msgid ""
+"As we can see, the contract is not liquid. In fact, In order to unlock "
+"the funds, :bitml:`\"A\"` and :bitml:`\"B\"` must agree on the recipient "
+"of the donation, by giving their authorization on the same branch. This "
+"contract would be liquid only by assuming the cooperation between "
+":bitml:`\"A\"` and :bitml:`\"B\"`: indeed, :bitml:`\"A\"` alone cannot "
+"guarantee that the 2 BTC will eventually be donated, as :bitml:`\"B\"` "
+"can choose a different recipient, or even refuse to give any "
+"authorization."
+msgstr ""
+
+#: ../../verification.rst:79
+msgid ""
+"We can try to modify the contract to handle this situations by adding a "
+"timeout branch with :bitml:`(after 700000 (split (1 -> (withdraw \"A\")) "
+"(1 -> (withdraw \"B\"))))`. The new branch locks the contract until the "
+"block number 700000 is appended to the blockchain, modeling a delay. "
+"After the corresponding time passes, it unlocks and returns their "
+"deposits to :bitml:`\"A\"` and :bitml:`\"B\"`."
+msgstr ""
+
+#: ../../verification.rst:99
+msgid "Now the contract is liquid, and the toolchain confirms it."
+msgstr ""
+
+#: ../../verification.rst:112
+msgid "Liquidity with strategies"
+msgstr ""
+
+#: ../../verification.rst:114
+msgid ""
+"In the following contract, :bitml:`\"A\"` can reveal her secret and "
+"redeem its deposit. Otherwise, after a certain amount of time the block "
+"number 700000 will be appended to the blockchain, :bitml:`\"B\"` can "
+"redeem :bitml:`\"A\"`'s deposit, after providing his authorization to do "
+"so."
+msgstr ""
+
+#: ../../verification.rst:138
+msgid ""
+"We start by checking the strategy-less liquidity. As the result of the "
+"verification shows, the contract is not liquid. This is because if "
+"neither :bitml:`\"A\"` reveals her secret nor :bitml:`\"B\"` gives his "
+"authorization, the funds will be stuck forever."
+msgstr ""
+
+#: ../../verification.rst:156
+msgid ""
+"The |langname| toolchain allows us to specify the intended behaviour of a"
+" participant, called **strategy**. The security propriety is verified "
+"with respect to the specified strategies."
+msgstr ""
+
+#: ../../verification.rst:159
+msgid ""
+"We check if the contract is liquid if the strategy of :bitml:`\"A\"` "
+"consists in revealing her secret, expressed by :bitml:`(strategy \"A\" "
+"(do-reveal a)))` as parameter of :bitml:`(check-liquid Strategy ...)`."
+msgstr ""
+
+#: ../../verification.rst:163
+msgid ""
+"We also check the liquidity if :bitml:`\"A\"` authorizes the second "
+"branch of the contract, with the strategy :bitml:`(strategy \"B\" (do-"
+"auth (auth \"B\"(after 700000 (withdraw \"B\")))))`."
+msgstr ""
+
+#: ../../verification.rst:190
+msgid "For both strategies, the contract is liquid."
+msgstr ""
+
+#: ../../verification.rst:209
+msgid "Quantitative liquidity"
+msgstr ""
+
+#: ../../verification.rst:211
+msgid ""
+"The previous flavours of liquidity require that no funds remain frozen "
+"within the contract. However, in some cases a participant could accept "
+"the fact that a portion of the funds remain frozen, especially when these"
+" funds would be ideally assigned to other participants."
+msgstr ""
+
+#: ../../verification.rst:216
+msgid ""
+"In the following contract, :bitml:`\"A\"` and :bitml:`\"B\"` put 1 BTC "
+"each. Each of them will get their own BTC back if they reveal their "
+"secret."
+msgstr ""
+
+#: ../../verification.rst:242
+msgid ""
+"In this setting, :bitml:`\"A\"` is interested in checking if she will get"
+" back her bitcoin, assuming that she reveals her secret. We check it "
+"using :bitml:`(check \"A\" has-more-than 1 (strategy \"A\" (do-reveal "
+"a)))`."
+msgstr ""
+
+#: ../../verification.rst:256
+msgid "Custom LTL queries"
+msgstr ""
+
+#: ../../verification.rst:258
+msgid ""
+"The following contract is a *timed commitment*, where :bitml:`\"A\"` "
+"wants to choose a secret :balzac:`a`, and reveal it before the deadline "
+":balzac:`d`; if :bitml:`\"A\"` does not reveal the secret within "
+":balzac:`d`, :bitml:`\"B\"` can redeem the 1 BTC deposit as a "
+"compensation."
+msgstr ""
+
+#: ../../verification.rst:285
+msgid ""
+"The |langname| toolchain allows us to check custom LTL properties, "
+"tailored specifically for the contract being verified, using :bitml"
+":`(check-query \"query\")`."
+msgstr ""
+
+#: ../../verification.rst:288
+msgid ""
+"In the timed commitment contract, we want the following two properties to"
+" be satisfied."
+msgstr ""
+
+#: ../../verification.rst:290
+msgid ""
+"If :bitml:`\"A\"` reveal her secret, she will get back her deposit. We "
+"check this property with :bitml:`(check-query \"[]<> (a revealed => A "
+"has-deposit>= 100000000 satoshi)\")`."
+msgstr ""
+
+#: ../../verification.rst:293
+msgid ""
+"Either :bitml:`\"B\"` gets to know the secret, or he will get the bitcoin"
+" as compensation. We check this property with :bitml:`(check-query \"[]<>"
+" (a revealed \\\\/ B has-deposit>= 100000000 satoshi)\"))`."
+msgstr ""
+
+#: ../../verification.rst:298
+msgid ""
+"Due to the internal representation of numbers in the model check, all BTC"
+" values have to be expressed in **satoshi** when checking custom LTL "
+"queries."
+msgstr ""
+
+#: ../../verification.rst:300
+msgid "The result is true for both queries:"
+msgstr ""
+
+#: ../../verification.rst:316
+msgid ""
+"The first LTL property has the same semantic as checking the quantitative"
+" liquidity of 1 BTC if the strategy of :bitml:`\"A\"` is to reveal her "
+"secret, or :bitml:`(check \"A\" has-more-than 1 (strategy \"A\" (do-"
+"reveal a)))`. Instead, the second LTL property cannot be expressed as a "
+"combination of liquidity and strategies."
+msgstr ""
+
+#: ../../verification.rst:321
+msgid ""
+"Other that :balzac:`revealed` and :balzac:`has-deposit>=`, you can "
+"express your LTL properties with :balzac:`has-deposit`, and :balzac:`has-"
+"deposit<=`."
+msgstr ""
+
