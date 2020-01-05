@@ -35,15 +35,18 @@ $ make server
  Browse to **localhost:8000** to check your documentation.
 
 
-# Creating The Build in another languange
+# Creating the documentation in another languange
 
-## Create translatable files
+To generate these .po locale files needed for localization,  you'll need to run this command from the **source** directory:
+```console
+$ sphinx-build -b gettext . _build/gettext
+```
+NOTE: You can skip this step, if there is already a  _build/gettext directory inside the **/source directory**
 
-To generate these .pot files it’s needed to run this command from your docs/ or source directory:
-sphinx-build -b gettext . _build/gettext
-
- Inside the source folder, generate the localization folder with:
- sphinx-intl update -p _build/gettext -l es_AR -l pt_BR
+Inside the source folder, generate the localization folder with this command:
+```console
+$ sphinx-intl update -p _build/gettext -l languange_COUNTRY
+````
 
 Use the following syntax for when generating a new localization: Languange + Country
 Example using Spanish from Argentina: es_ AR

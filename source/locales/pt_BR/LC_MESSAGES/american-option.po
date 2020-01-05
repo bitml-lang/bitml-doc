@@ -21,6 +21,8 @@ msgstr ""
 msgid "American Option"
 msgstr ""
 
+# Continue here
+
 #: ../../american-option.rst:5
 msgid ""
 "An *option* is a financial contract that allows an investor to exercise a"
