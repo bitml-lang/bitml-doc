@@ -6,6 +6,7 @@ The documentation is generated in Python (both 2 and 3 version are tested by Tra
 
 Before starting, execute the following commands in this order:
 
+
 * 1 - Use [pip](https://pip.pypa.io/en/stable/installing/) to install the following Python packages:
 
 ```shell
@@ -34,7 +35,6 @@ $ make server
 
  Browse to **localhost:8000** to check your documentation.
 
-
 # Creating the documentation in another languange
 
 To generate these .po locale files needed for localization,  you'll need to run this command from the **source** directory:
@@ -51,6 +51,7 @@ $ sphinx-intl update -p _build/gettext -l languange_COUNTRY
 Use the following syntax for when generating a new localization: Languange + Country
 Example using Spanish from Argentina: es_ AR
 Example using Portuguese from Portugal: pt_PT
+
 
 # Available commands
 
