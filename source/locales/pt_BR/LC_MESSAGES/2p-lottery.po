@@ -64,34 +64,42 @@ msgid ""
 "independently execute the contract, refer to the :ref:`Timed Commitment` "
 "example."
 msgstr ""
+"Por uma questão de simpplicidade, esse contrato é executado sem que Alice perca de vista o que Bob está fazendo e vice-versa."
+"Para ver um exemplo  de como os dois participantes"
+"executam de forma independende os contratos, veja o exemplo em to the :ref:`Timed Commitment`"
 
 #: ../../2p-lottery.rst:52
 msgid ""
 "This is the contract compiled in Balzac, completed with the signatures "
 "and the secret required to execute the contract."
 msgstr ""
+"Esse é um exemplo do contrato compilado no `Balzac - Bitcoin Abstract Language, analyZer and Compiler<https://blockchain.unica.it/balzac/>`, concluído com as assinaturas"
+"e com o segredo necessário para executar o contrato."
+
 
 #: ../../2p-lottery.rst:191
 msgid ""
 "We have executed the compiled contract on the Bitcoin testnet. The hash "
 "of the transactions are the following:"
 msgstr ""
+"Executamos o contrato na testnet do Bitcoin. O hash "
+"das transações podem ser verificados a seguir:"
 
 #: ../../2p-lottery.rst:195
 msgid "Phase"
-msgstr ""
+msgstr "Fase"
 
 #: ../../2p-lottery.rst:195
 msgid "Tx name"
-msgstr ""
+msgstr "Nome do Transmissor"
 
 #: ../../2p-lottery.rst:195
 msgid "Tx id"
-msgstr ""
+msgstr "ID do Transmissor"
 
 #: ../../2p-lottery.rst:197 ../../2p-lottery.rst:198
 msgid "Init"
-msgstr ""
+msgstr "Init"
 
 #: ../../2p-lottery.rst:197
 msgid "Tinit"
@@ -102,34 +110,40 @@ msgid ""
 "`e94be8d58c1839e5649ac5a5c50dd114b235bc99338c7766c15e2a1a858fc8e7 "
 "<https://chain.so/tx/BTCTEST/e94be8d58c1839e5649ac5a5c50dd114b235bc99338c7766c15e2a1a858fc8e7>`_"
 msgstr ""
+"`e94be8d58c1839e5649ac5a5c50dd114b235bc99338c7766c15e2a1a858fc8e7 "
+"<https://chain.so/tx/BTCTEST/e94be8d58c1839e5649ac5a5c50dd114b235bc99338c7766c15e2a1a858fc8e7>`_"
 
 #: ../../2p-lottery.rst:198
 msgid "T1"
-msgstr ""
+msgstr "T1"
 
 #: ../../2p-lottery.rst:198
 msgid ""
 "`72c38df85cb8deb2a89d9af937662ccad7b1c851513ae719b4e6195ae85ec62d "
 "<https://chain.so/tx/BTCTEST/72c38df85cb8deb2a89d9af937662ccad7b1c851513ae719b4e6195ae85ec62d>`_"
 msgstr ""
+"`72c38df85cb8deb2a89d9af937662ccad7b1c851513ae719b4e6195ae85ec62d "
+"<https://chain.so/tx/BTCTEST/72c38df85cb8deb2a89d9af937662ccad7b1c851513ae719b4e6195ae85ec62d>`_"
 
 #: ../../2p-lottery.rst:199 ../../2p-lottery.rst:200
 msgid "b commitment"
-msgstr ""
+msgstr "Compromisso do player B"
 
 #: ../../2p-lottery.rst:199
 msgid "T2"
-msgstr ""
+msgstr "T2"
 
 #: ../../2p-lottery.rst:199
 msgid ""
 "`835b2e52bb1b0c903025c86c4469d3f62ab888118bf0f56c7bbc196ffac9e350 "
 "<https://chain.so/tx/BTCTEST/835b2e52bb1b0c903025c86c4469d3f62ab888118bf0f56c7bbc196ffac9e350>`_"
 msgstr ""
+"`835b2e52bb1b0c903025c86c4469d3f62ab888118bf0f56c7bbc196ffac9e350 "
+"<https://chain.so/tx/BTCTEST/835b2e52bb1b0c903025c86c4469d3f62ab888118bf0f56c7bbc196ffac9e350>`_"
 
 #: ../../2p-lottery.rst:200
 msgid "T3"
-msgstr ""
+msgstr "T3"
 
 #: ../../2p-lottery.rst:200
 msgid ""
@@ -139,49 +153,57 @@ msgstr ""
 
 #: ../../2p-lottery.rst:201 ../../2p-lottery.rst:202
 msgid "a commitment"
-msgstr ""
+msgstr "Compromisso do player A"
 
 #: ../../2p-lottery.rst:201
 msgid "T5"
-msgstr ""
+msgstr "T5"
 
 #: ../../2p-lottery.rst:201
 msgid ""
 "`a8f02fe90ec579aa0530238dd049794e058c4b7e9c2e9948309a6b034ddda73e "
 "<https://chain.so/tx/BTCTEST/a8f02fe90ec579aa0530238dd049794e058c4b7e9c2e9948309a6b034ddda73e>`_"
 msgstr ""
+"`a8f02fe90ec579aa0530238dd049794e058c4b7e9c2e9948309a6b034ddda73e "
+"<https://chain.so/tx/BTCTEST/a8f02fe90ec579aa0530238dd049794e058c4b7e9c2e9948309a6b034ddda73e>`_"
 
 #: ../../2p-lottery.rst:202
 msgid "T6"
-msgstr ""
+msgstr "T6"
 
 #: ../../2p-lottery.rst:202
 msgid ""
 "`08f24c84628641fecf0f33f013dbdc24c507530282cfb3c5eff97c6c2d502e59 "
 "<https://chain.so/tx/BTCTEST/08f24c84628641fecf0f33f013dbdc24c507530282cfb3c5eff97c6c2d502e59>`_"
 msgstr ""
+"`08f24c84628641fecf0f33f013dbdc24c507530282cfb3c5eff97c6c2d502e59 "
+"<https://chain.so/tx/BTCTEST/08f24c84628641fecf0f33f013dbdc24c507530282cfb3c5eff97c6c2d502e59>`_"
 
 #: ../../2p-lottery.rst:203 ../../2p-lottery.rst:204
 msgid "Lottery execution"
-msgstr ""
+msgstr "Execução da Loteria"
 
 #: ../../2p-lottery.rst:203
 msgid "T8"
-msgstr ""
+msgstr "T8"
 
 #: ../../2p-lottery.rst:203
 msgid ""
 "`ed35d4849c73680d16f9c3a3cd1ce135ab35428b39066db191167a1f501b5ec7 "
 "<https://chain.so/tx/BTCTEST/ed35d4849c73680d16f9c3a3cd1ce135ab35428b39066db191167a1f501b5ec7>`_"
 msgstr ""
+"`ed35d4849c73680d16f9c3a3cd1ce135ab35428b39066db191167a1f501b5ec7 "
+"<https://chain.so/tx/BTCTEST/ed35d4849c73680d16f9c3a3cd1ce135ab35428b39066db191167a1f501b5ec7>`_"
 
 #: ../../2p-lottery.rst:204
 msgid "T9"
-msgstr ""
+msgstr "T9"
 
 #: ../../2p-lottery.rst:204
 msgid ""
 "`f7097c3523aecc62dc97c790f1b276db9fc662f7a4b13fd548093ff11a09d33d "
 "<https://chain.so/tx/BTCTEST/f7097c3523aecc62dc97c790f1b276db9fc662f7a4b13fd548093ff11a09d33d>`_"
 msgstr ""
+"`f7097c3523aecc62dc97c790f1b276db9fc662f7a4b13fd548093ff11a09d33d "
+"<https://chain.so/tx/BTCTEST/f7097c3523aecc62dc97c790f1b276db9fc662f7a4b13fd548093ff11a09d33d>`_"
 
