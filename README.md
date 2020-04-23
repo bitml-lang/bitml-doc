@@ -12,10 +12,11 @@ Before starting, execute the following commands:
 $ pip install sphinx pygments sphinxcontrib-inlinesyntaxhighlight
 ```
 
- * 2 - Install Lexer:
+ * 2 - Install Lexers:
 
  ```shell
 $ make install-lexer
+$ make install-lexer-balzac
  ```
  
 # Building
