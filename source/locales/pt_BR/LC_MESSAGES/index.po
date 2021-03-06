@@ -1,0 +1,141 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, N. Atzei, M. Bartoletti, S. Lande, R. Zunino
+# This file is distributed under the same license as the BitML package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BitML 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-04 16:05-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../index.rst:25
+msgid "BitML Tutorial"
+msgstr "Tutorial BitML"
+
+#: ../../index.rst:38
+msgid "Smart contracts"
+msgstr "Smart Contracts(Contratos Inteligentes)"
+
+#: ../../index.rst:3
+msgid "BitML Toolchain"
+msgstr "Conjunto de Ferramentas da linguagem BitML(Toolchain)"
+
+#: ../../index.rst:5
+msgid ""
+"|langname| is a domain-specific language for Bitcoin smart contracts, "
+"introduced in [CCS18]_. The |langname| toolchain implements:"
+msgstr "|langname| é uma DSL(domain-specific language) para Smart Contracts do Bitcoin,"
+"apresentada em [CCS18]_. O conjunto de ferramentas |langname| implementa as seguintes funcionalidades:"
+
+#: ../../index.rst:8
+msgid ""
+"an **IDE** for developing BitML contracts, integrated in the DrRacket IDE"
+" [RACKET]_;"
+msgstr "um **IDE** para desenvolvimento de contratos baseados em BitML, integrado dentro do IDE DrRacket"
+" [RACKET]_;"
+
+#: ../../index.rst:9
+msgid ""
+"a **compiler** which translates |langname| contracts into *standard* "
+"Bitcoin transaction. The compiler is *computationally sound*, meaning "
+"that computational attacks (i.e., at the level of Bitcoin transactions) "
+"can be detected at the symbolic level of the BitML semantics;"
+msgstr "um **compilador** que traduz contratos |langname| em contratos transacionais *padronizados* "
+"para Bitcoin. O compilador é *computacionalmente adequado*, que sigfnica"
+"que ataques computacionais (E.X., no nível das transações do Bitcoin) "
+"possam ser detectados no nível simbólico da semântica da linguagem BitML;"
+
+#: ../../index.rst:10
+msgid ""
+"a **model checker** which verifies security properties of BitML "
+"contracts, like their *liquidity* (i.e., funds never remain frozen in a "
+"contract [POST19]_), and custom LTL properties. The model checker is "
+"based on Maude [MAUDE]_."
+msgstr ""
+"um **verificador de modelo(model checker)** quer verifica as propriedades de segurança "
+"dos contratos BitML, como sua *liquidez* (E.X., fundos nunca ficam bloqueados "
+"em um contrato [POST19]_), e propriedades LTL(https://en.wikipedia.org/wiki/Linear_temporal_logic) personalizadas. O verificador de modelo(model checker) é "
+"baseado no Verificador Maude de Modelos Lógicos LTL(Maude LTL Logical Model Checker) [MAUDE]_."
+"http://maude.cs.illinois.edu/tools/lmc/"
+
+#: ../../index.rst:12
+msgid ""
+"We made available a `preprint <https://arxiv.org/abs/1905.07639>`_ "
+"describing out toolchain, and a short video `demonstration "
+"<https://www.youtube.com/watch?v=bxx3bM5Pm6c>`_."
+msgstr ""
+"Disponibilizamos uma documentação para impressão em `<https://arxiv.org/abs/1905.07639>`_ "
+"que descreve nosso conjunto de ferramentas(Toolchain), e um curto vídeo de `demonstração "
+"<https://www.youtube.com/watch?v=bxx3bM5Pm6c>`_."
+
+#: ../../index.rst:15
+msgid ""
+"The |langname| toolchain is developed by the `Blockchain@Unica group "
+"<http://blockchain.unica.it/>`_ of the `University of Cagliari "
+"<https://www.unica.it/unica/en/homepage.page>`_. The project is open "
+"source, and you are welcome to contribute to its `repositories "
+"<https://github.com/bitml-lang>`_."
+msgstr ""
+"O conjunto de ferramentas(toolchain) |langname| é desenvolvido pelo `grupo Blockchain@Unica "
+"<http://blockchain.unica.it/>`_ da `Universidade de Cagliari, em Sardinia, Itália"
+"<https://www.unica.it/unica/en/homepage.page>`_. O projeto é Open "
+"Source, e você é bem vindo para contribuir para os `repositórios do projeto no Github"
+"<https://github.com/bitml-lang>`_."
+
+#: ../../index.rst:23
+msgid "Contents"
+msgstr "Conteúdo"
+
+#: ../../index.rst:64
+msgid ""
+"|langname| is intended for research purposes only. Do not use it to "
+"create mainnet transactions, or do it at your own risk."
+msgstr ""
+"NOTA IMPORTANTE: |langname| foi projetada com foco em pesquisa apenas! **Não utilize** para "
+"criar transações na mainnet, **ou faça por sua PRÓPRIA CONTA E RISCO!!!!**"
+
+#: ../../index.rst:69
+msgid "References"
+msgstr "Referências:"
+
+#: ../../index.rst:73
+msgid ""
+"Bartoletti, R. Zunino. **BitML: A Calculus for Bitcoin Smart Contracts**."
+" In *ACM SIGSAC CCS*, 2018. Preprint: "
+"https://eprint.iacr.org/2018/122.pdf"
+msgstr ""
+"Bartoletti, R. Zunino. **BitML:  A Calculus for Bitcoin Smart Contracts(BitML: Um Cálculo para Smart Contracts em Bitcoin - Inglês)** "
+"*ACM SIGSAC CCS*, 2018. Link para impressão: "
+"https://eprint.iacr.org/2018/122.pdf"
+
+#: ../../index.rst:75
+msgid ""
+"Bartoletti, R. Zunino. **Verifying liquidity of Bitcoin contracts**. In "
+"*Principles of Security and Trust (POST)*, 2019. Preprint: "
+"https://eprint.iacr.org/2018/1125.pdf"
+msgstr ""
+"Bartoletti, R. Zunino. **Verifying liquidity of Bitcoin contracts(VerificANDO liquidez de contratos em Bitcoin)**. Em "
+"*Principles of Security and Trust (POST)*, 2019. Link para impressão: "
+"https://eprint.iacr.org/2018/1125.pdf"
+
+#: ../../index.rst:77
+msgid "https://racket-lang.org/"
+msgstr "https://racket-lang.org/"
+
+#: ../../index.rst:79
+msgid ""
+"http://maude.cs.illinois.edu/w/index.php/The_Maude_System "
+"http://maude.sip.ucm.es/strategies/"
+msgstr ""
+"http://maude.cs.illinois.edu/w/index.php/The_Maude_System "
+"http://maude.sip.ucm.es/strategies/"
+

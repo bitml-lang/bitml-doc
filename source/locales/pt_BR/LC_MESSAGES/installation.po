@@ -1,0 +1,68 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, N. Atzei, M. Bartoletti, S. Lande, R. Zunino
+# This file is distributed under the same license as the BitML package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BitML 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-04 16:05-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../installation.rst:3
+msgid "Getting started"
+msgstr ""
+
+#: ../../installation.rst:7
+msgid "Installation"
+msgstr ""
+
+#: ../../installation.rst:11
+msgid "Manual installation"
+msgstr ""
+
+#: ../../installation.rst:13
+msgid ""
+"For machines with Ubuntu 16 or newer, clone or download this `repository "
+"<https://github.com/bitml-lang/bitml-compiler>`_, execute the "
+"installation script :code:`install.sh`, then log off and login again."
+msgstr ""
+
+#: ../../installation.rst:26
+msgid "Virtual machine image"
+msgstr ""
+
+#: ../../installation.rst:28
+msgid ""
+"`Here "
+"<https://drive.google.com/file/d/1hVE2s2cr83z1X4VZNg2pKHfAH5-Dq4wX/view?usp=sharing>`_"
+" you can find a VirtualBox virtual machine image with the |langname| "
+"toolchain pre-installed."
+msgstr ""
+
+#: ../../installation.rst:33
+msgid "Next steps"
+msgstr ""
+
+#: ../../installation.rst:35
+msgid ""
+"To write a BitML contract, open the DrRacket IDE and put at the beginning"
+" of your file :code:`#lang bitml`."
+msgstr ""
+
+#: ../../installation.rst:37
+msgid ""
+"For an overview of the capabilities of the toolchain, watch or video "
+"`demonstration <https://www.youtube.com/watch?v=bxx3bM5Pm6c>`_. To learn "
+"more about the BitML toolchain, take a look at the :code:`examples` "
+"folder in the repository, or read :ref:`BitML in a nuthsell`."
+msgstr ""
+

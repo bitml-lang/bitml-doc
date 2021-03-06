@@ -1,0 +1,64 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, N. Atzei, M. Bartoletti, S. Lande, R. Zunino
+# This file is distributed under the same license as the BitML package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BitML 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-04 16:05-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../american-option.rst:3
+msgid "American Option"
+msgstr ""
+
+# Continue here
+
+#: ../../american-option.rst:5
+msgid ""
+"An *option* is a financial contract that allows an investor to exercise a"
+" choice between two subcontracts. We implement in BitML the *American "
+"option*, where the investor can exercise the choice anytime before a "
+"given deadline."
+msgstr ""
+
+#: ../../american-option.rst:10
+msgid ""
+"We start by defining the parametric contract :bitml:`(AmericanOption Part"
+" t Contract1 Contract2 Default)`. The parameter of the contract are: a "
+"participant ``Part`` who can choose, before deadline ``t``, to authorise "
+"the either ``Contract1`` or ``Contract2``. If time ``t`` passes, the "
+"contract can proceed as the parameter contract ``Default``."
+msgstr ""
+
+#: ../../american-option.rst:15
+msgid ""
+"We exploit the American Option to implement an investment contract "
+"between an investor ``A`` and an issuer ``I``. After stipulating the "
+"contract, ``A`` can choose whether to invest, or to retract. If she "
+"authorise the contract ``Invest``, she immediately pays her 1 BTC deposit"
+" to ``I``, expecting to get back 1.1 BTC from ``I`` after block "
+"160000000. If she authorise the contract ``Retract``, she does not "
+"invest, but she only gets back 0.95 BTC, paying 0.05 BTC to ``I`` as a "
+"fee. Otherwise, if she doesn't chose before the deadline ``t`` , ``I`` "
+"can invoke the contract ``Default``, which returns ``A``'s deposit to "
+"her, minus a 0.1 BTC penalty, which goes to ``I``."
+msgstr ""
+
+#: ../../american-option.rst:28
+msgid "Finally, we verify that the contract is liquid."
+msgstr ""
+
+#: ../../american-option.rst:90
+msgid "This is the result of the compilation."
+msgstr ""
+
